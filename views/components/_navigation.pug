@@ -12,9 +12,6 @@ header.header__main-nav
                             li: a(href="/").header__navbar-list--item Home 
                             li: a(href="/bikes").header__navbar-list--item Bikes 
                             li: a(href="/top-five-bicycles").header__navbar-list--item Top Five Bicycles 
-                            //- li: a(href="").header__navbar-list--item About
-                            //- li: a(href="").header__navbar-list--item Contact
-
 
                             if currUser
                                 li: span.logout-btn.header__navbar-list--item#user-logout Logout
@@ -24,3 +21,7 @@ header.header__main-nav
                             else 
                                 li: a(href="/login").header__navbar-list--item Login
                                 li: a(href="/signup").header__navbar-list--item Signup
+
+                .header__navbar-menu-mbl
+                    svg.header__navbar-menu-mbl-icon
+                        use(xlink:href=`/icons/icons.svg#mbl-nav`)

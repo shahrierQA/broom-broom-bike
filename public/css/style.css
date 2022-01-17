@@ -43,8 +43,7 @@ body {
 
 .container {
   width: 100%;
-  padding-right: var(--bs-gutter-x, 0.75rem);
-  padding-left: var(--bs-gutter-x, 0.75rem);
+  padding: 0 2rem;
   margin-right: auto;
   margin-left: auto; }
 
@@ -173,11 +172,19 @@ a:visited {
   padding: 5rem;
   border-radius: 7px;
   box-shadow: rgba(93, 188, 255, 0.2) 0px 48px 100px 0px; }
+  @media (max-width: 75em) {
+    .action__box {
+      width: 100%; } }
   .action__box-info {
     text-align: center; }
     .action__box-info .btn__action {
-      padding: 1.5rem 3rem;
+      width: 100%;
+      padding: 1rem;
       background: #5dbcff; }
+    @media (max-width: 56.25em) {
+      .action__box-info .btn__action {
+        padding: 0;
+        background: none; } }
 
 .nice-time {
   font-weight: bold;
@@ -553,17 +560,17 @@ template {
     .bicycle__review-stars input + label {
       font-size: 0; }
       .bicycle__review-stars input + label:before {
-        content: '★';
+        content: "★";
         font-size: 2.5rem; }
-      .bicycle__review-stars input + label[for='star5'] {
+      .bicycle__review-stars input + label[for="star5"] {
         order: 5; }
-      .bicycle__review-stars input + label[for='star4'] {
+      .bicycle__review-stars input + label[for="star4"] {
         order: 4; }
-      .bicycle__review-stars input + label[for='star3'] {
+      .bicycle__review-stars input + label[for="star3"] {
         order: 3; }
-      .bicycle__review-stars input + label[for='star2'] {
+      .bicycle__review-stars input + label[for="star2"] {
         order: 2; }
-      .bicycle__review-stars input + label[for='star1'] {
+      .bicycle__review-stars input + label[for="star1"] {
         order: 1; }
       .bicycle__review-stars input + label:hover,
       .bicycle__review-stars input + label:hover ~ label {
@@ -579,6 +586,9 @@ template {
     flex: 1; }
   .bicycle__review-content .btn__review {
     flex: 0.5; }
+  @media (max-width: 75em) {
+    .bicycle__review-content {
+      flex-direction: column; } }
 
 .bicycle__review-writtings {
   margin-top: 4rem; }
@@ -625,7 +635,7 @@ template {
 .row {
   max-width: 114rem;
   margin: 0 auto;
-  content: '';
+  content: "";
   display: table;
   clear: both; }
   .row:not(:last-child) {
@@ -666,6 +676,9 @@ template {
   background-color: #edf8ff;
   clip-path: polygon(0 0, 100% 0%, 100% 80%, 0% 100%);
   padding-top: 3rem; }
+  @media (max-width: 56.25em) {
+    .header {
+      clip-path: polygon(0 0, 100% 0%, 100% 88%, 0% 100%); } }
   .header__main-nav {
     background-color: #edf8ff; }
   .header__main-logo {
@@ -673,6 +686,15 @@ template {
   @media (max-width: 75em) {
     .header__navbar-menu {
       display: none; } }
+  .header__navbar-menu-mbl {
+    display: none; }
+    @media (max-width: 75em) {
+      .header__navbar-menu-mbl {
+        display: block; } }
+    .header__navbar-menu-mbl-icon {
+      fill: black;
+      width: 4rem;
+      height: 4rem; }
   .header__navbar-content {
     display: flex;
     justify-content: space-between;
@@ -705,6 +727,9 @@ template {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     align-items: center;
     padding-top: 7rem; }
+    @media (max-width: 75em) {
+      .header__content {
+        grid-template-columns: repeat(1, 1fr); } }
     .header__content-button {
       margin-top: 5rem;
       display: flex;
@@ -739,39 +764,24 @@ template {
   .header__content-img {
     position: relative; }
 
-.footer__content-box {
-  display: flex;
-  justify-content: space-between;
-  align-items: center; }
-  @media (max-width: 75em) {
-    .footer__content-box {
-      flex-direction: column; } }
-
-.footer__content-copy {
-  font-size: 2rem;
-  color: #333;
-  font-weight: 400; }
-
-.footer__content-menu--link nav ul,
-.footer__content-social--link nav ul {
+.footer__content-box nav ul {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center; }
-
-.footer__content-menu--link nav ul li {
-  margin-right: 3rem; }
-  .footer__content-menu--link nav ul li a:link,
-  .footer__content-menu--link nav ul li a:visited {
+  justify-content: center;
+  align-items: center;
+  column-gap: 2rem; }
+  .footer__content-box nav ul li a:link,
+  .footer__content-box nav ul li a:visited {
     text-decoration: none;
     font-size: 2rem;
     color: #333; }
 
-.footer__content-social--icon {
-  width: 3rem;
-  height: 3rem; }
-  .footer__content-social--icon nav ul li a {
-    margin-right: 5rem; }
+.footer__content-copy {
+  font-size: 2rem;
+  color: #333;
+  font-weight: 400;
+  text-align: center;
+  margin-top: 3rem; }
 
 .select__bike-content .heading__secondary {
   text-align: center; }
@@ -809,6 +819,12 @@ template {
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 7rem;
   margin-top: 8rem; }
+  @media (max-width: 75em) {
+    .select__bike-content--box {
+      grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 56.25em) {
+    .select__bike-content--box {
+      grid-template-columns: repeat(1, 1fr); } }
 
 .select__bike-card {
   border-radius: 3px;
@@ -893,10 +909,14 @@ template {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   align-items: center; }
+  @media (max-width: 75em) {
+    .choose__content {
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+      justify-content: center; } }
   .choose__content-box {
     margin-top: 5rem; }
   .choose__content-card {
-    width: 70%;
+    width: 80%;
     display: grid;
     grid-template-columns: min-content 1fr;
     align-items: center;
@@ -907,6 +927,9 @@ template {
     border-radius: 14px;
     padding: 2.5rem 3rem;
     transition: all 0.3s; }
+    @media (max-width: 56.25em) {
+      .choose__content-card {
+        width: 100%; } }
   .choose__content-card:hover {
     transform: scale(1.05);
     background: linear-gradient(to left, #5dbcff, #3a7bd5); }
@@ -992,6 +1015,12 @@ template {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 2rem; }
+  @media (max-width: 75em) {
+    .select__location-content--box {
+      grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 56.25em) {
+    .select__location-content--box {
+      grid-template-columns: repeat(1, 1fr); } }
 
 .select__location-img {
   width: 100%;
@@ -1033,6 +1062,10 @@ template {
   display: flex;
   justify-content: space-between;
   align-items: center; }
+  @media (max-width: 56.25em) {
+    .bicycle__content-head {
+      flex-direction: column;
+      align-items: flex-start; } }
 
 .bicycle__content-price {
   font-size: 2.6rem;
@@ -1043,6 +1076,9 @@ template {
   font-size: 2.3rem;
   text-align: right;
   color: #ff7730; }
+  @media (max-width: 56.25em) {
+    .bicycle__content-rating {
+      text-align: left; } }
   .bicycle__content-rating--star {
     color: #ff7730; }
 
@@ -1070,6 +1106,12 @@ template {
   gap: 8rem;
   justify-content: center;
   align-items: center; }
+  @media (max-width: 75em) {
+    .bicycle__booking-form {
+      grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 56.25em) {
+    .bicycle__booking-form {
+      grid-template-columns: repeat(1, 1fr); } }
 
 .bicycle__booking-group label {
   display: block;
@@ -1148,6 +1190,9 @@ select::-ms-expand {
   gap: 6rem;
   align-items: start;
   text-align: center; }
+  @media (max-width: 75em) {
+    .system__features-box {
+      grid-template-columns: repeat(1, minmax(0, 1fr)); } }
 
 .system__features-icon {
   width: 9rem;
@@ -1252,6 +1297,7 @@ select::-ms-expand {
       height: 100%;
       background-image: linear-gradient(to right, rgba(21, 55, 80, 0.9), rgba(0, 0, 0, 0.9)); }
   .bicycle__header-content {
+    padding: 0 2rem;
     width: 45%;
     position: absolute;
     bottom: 13vw;
@@ -1259,8 +1305,10 @@ select::-ms-expand {
     top: 25%; }
     @media (max-width: 56.25em) {
       .bicycle__header-content {
-        width: 90%;
-        margin: 0 auto; } }
+        width: 100%;
+        margin: 0 auto;
+        bottom: 13vw;
+        left: 0; } }
   .bicycle__header-summary {
     font-size: 2.3rem;
     color: white;
@@ -1278,6 +1326,9 @@ select::-ms-expand {
   font-weight: 400;
   letter-spacing: 0.2rem;
   word-spacing: 0.5rem; }
+  @media (max-width: 37.5em) {
+    .heading__bicycle {
+      font-size: 3.5rem; } }
 
 .profile__main {
   background: linear-gradient(to left, #2980b9, #2c3e50); }

@@ -20,6 +20,10 @@
   &__content {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
+    @include respond(tab-land) {
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+      justify-content: center;
+    }
     align-items: center;
 
     &-box {
@@ -27,7 +31,10 @@
     }
 
     &-card {
-      width: 70%;
+      width: 80%;
+      @include respond(tab-port) {
+        width: 100%;
+      }
       display: grid;
       grid-template-columns: min-content 1fr;
       align-items: center;

@@ -3,6 +3,10 @@
   background-color: $color-primary-light;
   clip-path: polygon(0 0, 100% 0%, 100% 80%, 0% 100%);
 
+  @include respond(tab-port) {
+    clip-path: polygon(0 0, 100% 0%, 100% 88%, 0% 100%);
+  }
+
   padding-top: 3rem;
 
   &__main-nav {
@@ -19,6 +23,19 @@
     &-menu {
       @include respond(tab-land) {
         display: none;
+      }
+      &-mbl {
+        display: none;
+
+        @include respond(tab-land) {
+          display: block;
+        }
+
+        &-icon {
+          fill: black;
+          width: 4rem;
+          height: 4rem;
+        }
       }
     }
 
@@ -67,6 +84,9 @@
   &__content {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
+    @include respond(tab-land) {
+      grid-template-columns: repeat(1, 1fr);
+    }
     align-items: center;
 
     padding-top: 7rem;

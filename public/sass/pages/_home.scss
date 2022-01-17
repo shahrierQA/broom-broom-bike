@@ -8,6 +8,9 @@
     margin-top: 9rem;
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
+    @include respond(tab-land) {
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
     gap: 6rem;
     align-items: start;
     text-align: center;

@@ -7,6 +7,12 @@
   &-content--box {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    @include respond(tab-land) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @include respond(tab-port) {
+      grid-template-columns: repeat(1, 1fr);
+    }
     gap: 2rem;
   }
 

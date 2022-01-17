@@ -30,15 +30,12 @@ a:visited {
 .text-center {
   text-align: center;
 }
-// .tab-content {
-//   display: none;
-// }
-// .tab-content.active {
-//   display: block;
-// }
 
 .action__box {
   width: 70%;
+  @include respond(tab-land) {
+    width: 100%;
+  }
   margin: 0 auto;
   background: $color-primary-dark;
   padding: 5rem;
@@ -49,8 +46,16 @@ a:visited {
     text-align: center;
 
     .btn__action {
-      padding: 1.5rem 3rem;
+      width: 100%;
+      padding: 1rem;
       background: $color-primary;
+    }
+
+    @include respond(tab-port) {
+      .btn__action {
+        padding: 0;
+        background: none;
+      }
     }
   }
 }

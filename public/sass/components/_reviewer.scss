@@ -36,22 +36,22 @@
       & + label {
         font-size: 0;
         &:before {
-          content: '★';
+          content: "★";
           font-size: 2.5rem;
         }
-        &[for='star5'] {
+        &[for="star5"] {
           order: 5;
         }
-        &[for='star4'] {
+        &[for="star4"] {
           order: 4;
         }
-        &[for='star3'] {
+        &[for="star3"] {
           order: 3;
         }
-        &[for='star2'] {
+        &[for="star2"] {
           order: 2;
         }
-        &[for='star1'] {
+        &[for="star1"] {
           order: 1;
         }
         &:hover,
@@ -74,6 +74,10 @@
 
     .btn__review {
       flex: 0.5;
+    }
+
+    @include respond(tab-land) {
+      flex-direction: column;
     }
   }
 

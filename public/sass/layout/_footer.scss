@@ -1,11 +1,20 @@
 .footer__content {
   &-box {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    nav ul {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      column-gap: 2rem;
 
-    @include respond(tab-land) {
-      flex-direction: column;
+      li {
+        a:link,
+        a:visited {
+          text-decoration: none;
+          font-size: 2rem;
+          color: $color-grey-dark;
+        }
+      }
     }
   }
 
@@ -13,35 +22,7 @@
     font-size: 2rem;
     color: $color-grey-dark;
     font-weight: 400;
-  }
-
-  &-menu--link nav ul,
-  &-social--link nav ul {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  &-menu--link {
-    nav ul li {
-      margin-right: 3rem;
-
-      a:link,
-      a:visited {
-        text-decoration: none;
-        font-size: 2rem;
-        color: $color-grey-dark;
-      }
-    }
-  }
-
-  &-social--icon {
-    width: 3rem;
-    height: 3rem;
-
-    nav ul li a {
-      margin-right: 5rem;
-    }
+    text-align: center;
+    margin-top: 3rem;
   }
 }

@@ -119,7 +119,6 @@ exports.getBicycleBySlug = catchError(async (req, res, next) => {
     return next(new AppError("This bicycle is not available right now!", 400));
 
   const findRevs = await ReviewModel.find({ bicycle: bicycle.id });
-
   const reviewedUserIds = findRevs.map((el) => el.user.id);
 
   res.status(200).render("pages/bicycle-single", {
