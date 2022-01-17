@@ -60,7 +60,7 @@ block content
                 
 
     if currUser && currUser.role === 'user'
-        if !findBike
+        if !bookedIds.includes(bicycle.id) && !detailsIds.includes(bicycle.id)
             section.bicycle__booking 
                 .container 
                     .bicycle__booking-box
@@ -72,7 +72,6 @@ block content
 
                                 .bicycle__booking-group
                                     label.group-label(for="booked-for") For How Many hours
-                                    //- input.group-input.input-booked-for(type="number" id="booked-for" required)
 
                                     select.group-input.input-booked-for(id="booked-for" required)
                                         - const bookedForArr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
@@ -88,9 +87,6 @@ block content
                                         each optn in quantity
                                             option(value=optn) #{optn}
                                     
-                                
-                                    //- min="1" max="15"
-
                                 .bicycle__booking-group
                                     label.group-label(for="pickup-location") Pickup Location
                                     select.group-input.input-pickup-location(id="pickup-location" required)
@@ -104,7 +100,7 @@ block content
                                     input#booking__bicycle-id(type="hidden" value=(bicycle && bicycle.id))
 
 
-        else if bookedBikeIds.includes(bicycle.id)
+        else if bookedIds.includes(bicycle.id)
             +actionBox("This bicycle is already booked", "#")
         else
             +actionBox("see your bicycle booking details", `/bicycle/${bicycle.id}/booking-details`)

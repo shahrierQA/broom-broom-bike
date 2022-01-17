@@ -10,19 +10,27 @@ const bookingDetailsModel = require("../models/detailsModel");
 const BookingModel = require("../models/bookingModel");
 // const moment = require('moment');
 
+exports.getBikeIds = catchError(async (req, res, next) => {
+  const bookPromise = BookingModel.find();
+  const detailsPromise = bookingDetailsModel.find();
+
+  const [book, details] = await Promise.all([bookPromise, detailsPromise]);
+
+  const bookedIds = book.map((el) => el.bicycle.id);
+  const detailsIds = details.map((el) => el.bicycle.id);
+
+  res.locals.bookedIds = bookedIds;
+  res.locals.detailsIds = detailsIds;
+
+  next();
+});
+
 exports.getHomePage = catchError(async (req, res, next) => {
   const dataBicycles = await BicycleModel.find();
-  const bookings = await BookingModel.find();
-  const bookingDetails = await bookingDetailsModel.find();
-
-  const bookedIds = bookings.map((el) => el.bicycle.id);
-  const detailsIds = bookingDetails.map((el) => el.bicycle.id);
 
   res.status(200).render("pages/index", {
     title: "Broom Broom Bike",
     dataBicycles: dataBicycles.slice(0, 6),
-    bookedIds,
-    detailsIds,
   });
 });
 
@@ -87,8 +95,6 @@ exports.getMyAccount = catchError(async (req, res, next) => {
     fields: "bicycle user price",
   });
 
-  const aluu = findUser.bookings.map((el) => el.bicycle.name.split(","));
-
   res.status(200).render("pages/profile", {
     title: "My Account",
     bookings: findUser.bookings,
@@ -112,26 +118,14 @@ exports.getBicycleBySlug = catchError(async (req, res, next) => {
   if (!bicycle)
     return next(new AppError("This bicycle is not available right now!", 400));
 
-  const findRevsPromise = ReviewModel.find({ bicycle: bicycle.id });
-  const findBikePromise = bookingDetailsModel.findOne({ bicycle: bicycle.id });
-  const bookingsPromise =
-    req.CurrentUser && BookingModel.find({ user: req.CurrentUser.id });
-
-  const [findRevs, findBike, bookings] = await Promise.all([
-    findRevsPromise,
-    findBikePromise,
-    bookingsPromise,
-  ]);
+  const findRevs = await ReviewModel.find({ bicycle: bicycle.id });
 
   const reviewedUserIds = findRevs.map((el) => el.user.id);
-  const bookedBikeIds = req.CurrentUser && bookings.map((el) => el.bicycle.id);
 
   res.status(200).render("pages/bicycle-single", {
     title: bicycle.slug,
     bicycle,
     reviewedUserIds,
-    findBike,
-    bookedBikeIds,
   });
 });
 

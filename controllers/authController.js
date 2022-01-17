@@ -140,7 +140,6 @@ exports.isAuthenticate = async (req, res, next) => {
       );
 
       const currentUser = await UserModel.findById(decoded.id);
-      console.log(currentUser);
 
       if (!currentUser) return next();
 

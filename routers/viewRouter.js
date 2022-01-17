@@ -9,6 +9,7 @@ router.get("/login", viewController.getLoginForm);
 router.get("/signup", viewController.getSignupForm);
 
 router.use(authController.isAuthenticate);
+router.use(viewController.getBikeIds);
 
 router.get(
   "/",
