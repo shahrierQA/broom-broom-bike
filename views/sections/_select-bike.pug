@@ -1,0 +1,19 @@
+include ../components/_bicycleCard
+
+section.select__bike(id="choose-bike")
+    .container 
+        .select__bike-content 
+            h2.heading.heading__secondary Choose your Bike 
+
+
+            if (dataBicycles.length === 0)
+                .select__bike-content--box
+                    h5.heading.heading__penta There is no available bike in the store.
+
+            else
+                .select__bike-content--box
+                    each bike in dataBicycles
+                        +bikeCard(bike)
+
+                .select__bike-content--button
+                    a(href="/bikes") See More

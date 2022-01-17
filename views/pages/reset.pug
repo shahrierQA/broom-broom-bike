@@ -1,0 +1,28 @@
+include ../components/_head
+
+body.account__main
+    .account__system 
+        .container
+            .account__system-content--box
+                .account__system-box
+                    .account__system-acc
+                        .account__system-heading
+                            h2.heading.heading__tertiary Reset my password
+                        
+                        form.account__system-form#form-resetPassword(autocomplete="off")
+                            .form__group
+                                input#password.form__input(type='password', placeholder="Password")
+                            .form__group
+                                input#passwordConfirm.form__input(type='password', placeholder="Password Confirm")
+
+                            .form__group-btn
+                                input(type="hidden" value=`${tokenReset}`)#token__id
+                                button.btn.btn__action.btn__action-login Reset my password
+                        
+
+                    
+                    include ../components/_accountBanner
+
+
+
+include ../components/_scripts

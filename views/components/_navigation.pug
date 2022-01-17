@@ -1,0 +1,26 @@
+header.header__main-nav
+    .container
+        .header__navbar-box
+            .header__navbar-content
+                .header__logo
+                    a(href="/") 
+                        img(src="/img/main-logo.png", alt="Main Logo").header__main-logo
+                    //- h5 broom broom bike
+                .header__navbar-menu
+                    nav.header__navbar-nav
+                        ul.header__navbar-list
+                            li: a(href="/").header__navbar-list--item Home 
+                            li: a(href="/bikes").header__navbar-list--item Bikes 
+                            li: a(href="/top-five-bicycles").header__navbar-list--item Top Five Bicycles 
+                            //- li: a(href="").header__navbar-list--item About
+                            //- li: a(href="").header__navbar-list--item Contact
+
+
+                            if currUser
+                                li: span.logout-btn.header__navbar-list--item#user-logout Logout
+                                li: a(href="/me").header__navbar-user--img
+                                    img(src=`/img/users/${currUser.photo}`, alt=(currUser.name))
+                            
+                            else 
+                                li: a(href="/login").header__navbar-list--item Login
+                                li: a(href="/signup").header__navbar-list--item Signup

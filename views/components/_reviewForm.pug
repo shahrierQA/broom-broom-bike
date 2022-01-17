@@ -1,0 +1,24 @@
+mixin reviewForm(bicycle = {}, reviewPosted)
+    .bicycle__review-box
+
+        - const idname = reviewPosted ? 'form-review-edit' : 'form-review-create'
+
+        form.bicycle__review-form(id=idname)
+            textarea#review-text(name="review" placeholder="Did you try this ? Leave a review....")
+
+            .bicycle__review-content
+                .bicycle__review-stars
+                    each num in [5, 4, 3, 2, 1]
+                        input(type="radio" id=`star${num}` name="rating" value=num)
+                        label(for=`star${num}`) #{num} Stars
+
+                - const val = reviewPosted ? 'Edit Review' : 'Submit Review'
+
+                input(type="submit" value=val).btn.btn__review#review-rating-btn
+                input(type="hidden" value=bicycle.id)#review-bicycle-id
+                input(type="hidden" value=(222))#review-main-id
+            
+
+
+
+//- (action=`/reviews/${bicycle.id}` method="POST")

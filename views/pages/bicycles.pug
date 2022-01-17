@@ -1,0 +1,33 @@
+extends ../base
+
+include ../components/_bicycleCard
+
+block content
+
+    section.bicycle__all
+        .container 
+            .bicycle__all-content 
+                .bicycle__all-content--heading
+                    
+                    if topFiveBicycles
+                        h2.heading.heading__secondary.text-center Top Five Cheapest Bicycles
+                    else 
+                        h2.heading.heading__secondary.text-center #{title}
+
+                .bike__sorting
+                    .bike__sorting-content
+                        .bike__sorting-nav
+                            p Sort By
+                            p
+                                svg.bike__sorting-icon
+                                    use(xlink:href=`/icons/icons.svg#arrow-sort`)
+                        
+                        ul.bike__sorting-menu 
+                            li: a(href="/bikes/?sort=-price") Best Match 
+                            li: a(href="/bikes/?sort=price") price low to high 
+                            li: a(href="/bikes/?sort=-price") price high to low
+
+                .select__bike-content--box
+                    each bike in allBicycles
+                        +bikeCard(bike)
+

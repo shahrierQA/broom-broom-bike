@@ -1,0 +1,242 @@
+.profile {
+  &__main {
+    background: linear-gradient(to left, #2980b9, #2c3e50);
+  }
+
+  &__user-name {
+    color: $color-primary;
+  }
+
+  &__content {
+    z-index: 1;
+    width: 80%;
+    margin: 0 auto;
+
+    .profile__header {
+      &-box {
+        display: grid;
+        grid-template-columns: 1fr max-content 1fr;
+        align-items: center;
+        background-color: white;
+        padding: 1.5rem 3rem;
+        border-radius: 12px;
+      }
+
+      &-author {
+        display: flex;
+        align-items: center;
+
+        &--img {
+          padding-right: 1.4rem;
+
+          img {
+            width: 6rem;
+            height: 6rem;
+            border-radius: 50%;
+          }
+        }
+
+        &--name {
+          font-size: 2rem;
+          letter-spacing: 0.1rem;
+          font-weight: 500;
+        }
+      }
+
+      &-logo {
+        &--img {
+          img {
+            height: 5rem;
+          }
+        }
+      }
+
+      &-others {
+        display: flex;
+        justify-content: flex-end;
+        &--btn {
+          button {
+            font-size: 1.7rem;
+            background-color: $color-primary-dark;
+            border: 1px solid $color-primary-dark;
+            color: white;
+            cursor: pointer;
+            padding: 1rem 3rem;
+            border-radius: 5px;
+          }
+        }
+      }
+    }
+
+    &-tab {
+      margin-top: 3rem;
+
+      .profile__tab {
+        &-box {
+          display: flex;
+          background-color: #fbfbfb;
+          border-radius: 12px;
+          overflow: hidden;
+        }
+
+        &-menu {
+          background-color: $color-primary-light;
+          padding: 3rem 0;
+          flex: 0.4;
+
+          .heading__penta {
+            padding: 0.5rem 4rem;
+            font-weight: 600;
+          }
+        }
+
+        &-body {
+          padding: 3rem 0;
+          flex: 1;
+          padding: 4rem 7rem;
+
+          .heading__quarter {
+            padding-bottom: 4rem;
+          }
+        }
+
+        &-list {
+          margin: 1rem 0;
+
+          &--link:link,
+          &--link:visited {
+            padding: 0.5rem 4rem;
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            font-size: 2rem;
+            transition: all 0.3s;
+            color: $color-grey-dark-1;
+            font-weight: 500;
+          }
+
+          a:hover {
+            transform: translateX(0.2rem);
+            color: $color-black;
+          }
+        }
+      }
+    }
+  }
+}
+
+.tabs-content .tab-box:not(:first-child) {
+  display: none;
+}
+
+.tabs-nav li.active {
+  border-right: 4px solid $color-primary;
+  color: $color-black;
+}
+
+.profile__tab-body {
+  .form {
+    &__group {
+      &:not(:last-child) {
+        margin-bottom: 4rem;
+      }
+
+      &-btn {
+        display: flex;
+        justify-content: flex-end;
+
+        .btn__settings {
+          margin-top: 4rem;
+        }
+      }
+    }
+
+    &__label {
+      display: block;
+      font-size: 2rem;
+      font-weight: 600;
+      color: $color-grey-dark;
+      margin-bottom: 0.5rem;
+    }
+
+    &__input {
+      width: 100%;
+      font-size: 1.7rem;
+      padding: 0 2rem;
+      height: 4.5rem;
+      border-radius: 6px;
+      border: 1px solid rgb(235, 235, 235);
+      transition: border 0.2s linear 0s, box-shadow 0.2s linear 0s;
+
+      &[type='text']:disabled {
+        border: none;
+        background: #dddddd;
+      }
+
+      &:focus {
+        // outline: none;
+        border-color: rgba(82, 168, 236, 0.8);
+        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset,
+          0 0 8px rgba(82, 168, 236, 0.6);
+        outline: 0 none;
+      }
+    }
+
+    &__upload {
+      font-size: 1.6rem;
+    }
+
+    &__photo-upload {
+      display: flex;
+      align-items: center;
+
+      margin-top: 2rem;
+    }
+
+    &__user-photo {
+      height: 5rem;
+      width: 5rem;
+      border-radius: 50%;
+      margin-right: 2rem;
+    }
+  }
+}
+
+.user__bookings {
+  &-img {
+    width: 300px;
+    img {
+      border: 3px solid $color-grey-dark;
+      border-radius: 9px;
+    }
+  }
+
+  &-text {
+    margin-top: 1.4rem;
+
+    .heading__penta {
+      text-transform: capitalize;
+      color: $color-primary-dark;
+    }
+
+    .bike-price {
+      font-size: 1.9rem;
+      font-weight: 500;
+
+      span:last-child {
+        font-weight: bold;
+        padding-left: 0.5rem;
+      }
+    }
+
+    .bike-bookers {
+      font-size: 1.9rem;
+      font-weight: 500;
+
+      span:last-child {
+        font-weight: bold;
+        color: $color-alert-success;
+      }
+    }
+  }
+}

@@ -1,0 +1,31 @@
+include ../components/_head
+
+body.account__main
+    .account__system 
+        .container
+            .account__system-content--box
+                .account__system-box
+                    .account__system-acc
+                        .account__system-heading
+                            h2.heading.heading__tertiary Log in to your account
+                        
+                        form.account__system-form#form-login
+                            .form__group
+                                input#email.form__input(type='email', placeholder="Email")
+                            .form__group
+                                input#password.form__input(type='password', placeholder="Password")    
+                            .form__group-btn
+                                button.btn.btn__action#btn__action-login Log in
+                            .account__system-footer
+                                a(href='/recover').account__system-footer--link#forgotten-password Forgot your password&quest;
+                                
+                                span New Here&quest;
+                                a(href="/signup").account__system-footer--link-2 Sign up
+                        
+
+                    
+                    include ../components/_accountBanner
+
+
+
+include ../components/_scripts

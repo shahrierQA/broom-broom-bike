@@ -1,0 +1,40 @@
+mixin features(icon, heading, text)
+    .system__features 
+        svg.system__features-icon 
+            use(xlink:href=`/icons/icons.svg#${icon}`)
+        .heading__quarter= heading
+        .system__features-text= text
+
+
+mixin choose__card(icon, heading, text)
+    svg.choose__card-icon
+        use(xlink:href=`/icons/icons.svg#${icon}`)
+    .choose__card-desc
+        .heading__penta= heading
+        .choose__card-text= text
+
+mixin socialLinks(icon, link)
+    li
+        a(href=link) 
+            svg.footer__content-social--icon
+                use(xlink:href=`/icons/icons.svg#${icon}`)
+
+
+
+
+mixin locations(img, caption)
+    .select__location-card
+        a(href="") 
+            figure.select__location-figure
+                .select__location-img--overlay
+                img.select__location-img(src=(img), alt=(caption))
+                figcaption.select__location-caption= caption
+                
+
+
+mixin actionBox(text, link)
+    .container
+        .action__box
+            .action__box-content
+                p.action__box-info
+                    a(href=link).btn.btn__action #{text}

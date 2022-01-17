@@ -1,0 +1,21 @@
+include ../components/mixins
+
+section.why__choose 
+    .container 
+        .choose__content
+            .choose__content-img 
+                img(src="/img/why-bicycle.png", alt="").why-bicycle-img
+            
+            .choose__content-text 
+                h2.heading.heading__tertiary Why Choose Us
+                p.heading.heading__sub-text The leading booking platform for bike rentals 
+                
+                .choose__content-box 
+                    .choose__content-card
+                        +choose__card('time', 'Save Time', 'No waste of time during your holidays to find a rental point on the spot!')
+
+                    .choose__content-card
+                        +choose__card('wallet', 'Affordable Price', 'No language barrier, thanks to our multilingual team! At the same price you would pay on the spot!')
+
+                    .choose__content-card
+                        +choose__card('ride', 'Available Riders', 'You will be able to fully enjoy your holiday and your ride!')

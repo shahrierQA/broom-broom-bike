@@ -1,0 +1,39 @@
+include ../components/_head
+
+body.account__main
+    .account__system 
+        .container 
+            .account__system-content--box
+                .account__system-box
+                    .account__system-acc
+                        .account__system-heading
+                            h2.heading.heading__tertiary Create a new account
+                        
+                        form.account__system-form#form-signup
+                            .form__group
+                                input#name.form__input(type='text', placeholder='Your name')
+                            
+                            .form__group
+                                input#email.form__input(type='email', placeholder='Email')
+
+                            .form__group
+                                input#password.form__input(type='password', placeholder='Password')
+
+                            .form__group
+                                input#passwordConfirm.form__input(type='password', placeholder='Password Confirm')  
+
+                            .form__group
+                                input#phoneNumber.form__input(type='text', placeholder='Phone Number (ex- +880 **********)')
+
+                            .form__group-btn
+                                button.btn.btn__action#btn__action-signup Sign up
+                                
+                            .account__system-footer
+                                span Already have an account&quest;
+                                a(href='/login').account__system-footer--link Log in
+
+                    include ../components/_accountBanner
+
+
+
+include ../components/_scripts

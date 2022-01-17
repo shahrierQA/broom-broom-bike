@@ -1,0 +1,20 @@
+mixin bikeCard(bike = {})
+    .select__bike-card
+        .select__bike-picture
+            img.select__bike-img(src=`/img/bicycles/${bike.imageCover}`, alt="Bicycle image")
+        .select__bike-main 
+            h6.heading.heading__hexa 
+                a(href=`/bicycle/${bike.slug}`).select__bike-name #{bike.name} 
+            p.select__bike-reason For the speed
+            .select__bike-require
+                p.select__bike-price BDT #{bike.price}
+                    sub &sol; hour
+                p.select__bike-rating 
+                    span ★
+                    span #{bike.ratingsAverage}
+            if bookedIds &&  bookedIds.includes(bike.id)
+                .select__bike-booked--tag 
+                    span Booked
+            else if bookedIds && detailsIds.includes(bike.id)
+                .select__bike-choose--tag 
+                    span Choosed

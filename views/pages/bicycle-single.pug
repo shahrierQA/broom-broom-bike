@@ -1,0 +1,114 @@
+extends ../base
+
+include ../components/_reviewForm
+include ../components/_review
+include ../components/mixins
+
+block content 
+    
+    .bicycle__header
+        .bicycle__header-hero
+            .bicycle__header-hero--overlay &nbsp;
+            img.bicycle__header-hero--img(src=`/img/bicycles/${bicycle.imageCover}`)
+
+
+        .bicycle__header-box
+            .bicycle__header-content
+                h2.heading__bicycle
+                    span #{bicycle.name}
+                p.bicycle__header-summary= bicycle.summary
+
+    section.bicycle__content 
+        .container
+            .bicycle__content-box
+                .bicycle__content-head
+                    - const bikename = bicycle.name.split(' ');
+                    h2.heading__secondary About #{bikename[0]} #{bikename[1]}
+                    .bicycle__content-require
+                        p.bicycle__content-price BDT #{bicycle.price}
+                            sub &sol; hour
+                        p.bicycle__content-rating 
+                            span.bicycle__content-rating--star
+                                = `★`.repeat(bicycle.ratingsAverage)
+                                = `☆`.repeat(5 - Math.round((bicycle.ratingsAverage * 10) / 10))
+
+
+                p.bicycle__content-text= bicycle.description
+
+
+    section.bicycle__review 
+        .container
+            if currUser && !reviewedUserIds.includes(currUser.id)
+                .bicycle__review-heading
+                    h4.heading__quarter Tell others what you think
+                +reviewForm(bicycle)
+            
+
+            else if currUser && reviewedUserIds.includes(currUser.id)
+                .bicycle__review-heading
+                    h4.heading__quarter Edit your review
+                +reviewForm(bicycle, reviewPosted = true)
+
+            //- if bicycle.reviews.length
+            .bicycle__review-writtings
+                .bicycle__review-heading
+                    if bicycle.reviews.length > 0
+                        h4.heading__quarter Ratings &amp; reviews
+
+                each rev in bicycle.reviews
+                    +review(rev)
+                
+
+    if currUser && currUser.role === 'user'
+        if !findBike
+            section.bicycle__booking 
+                .container 
+                    .bicycle__booking-box
+                        .bicycle__booking-header 
+                            h4.heading__quarter Start Riding Now
+
+                        form#bicycle__details-form
+                            .bicycle__booking-form
+
+                                .bicycle__booking-group
+                                    label.group-label(for="booked-for") For How Many hours
+                                    //- input.group-input.input-booked-for(type="number" id="booked-for" required)
+
+                                    select.group-input.input-booked-for(id="booked-for" required)
+                                        - const bookedForArr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+                                        
+                                        each optn in bookedForArr
+                                            option(value=optn) #{optn}
+                                
+                                .bicycle__booking-group 
+                                    label.group-label(for="quantity") Quantity 
+                                    select.group-input.input-quantity(id="quantity" required)
+                                        - const quantity = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+                                        
+                                        each optn in quantity
+                                            option(value=optn) #{optn}
+                                    
+                                
+                                    //- min="1" max="15"
+
+                                .bicycle__booking-group
+                                    label.group-label(for="pickup-location") Pickup Location
+                                    select.group-input.input-pickup-location(id="pickup-location" required)
+                                        - const bookedLocation = ["iiuc main gate", "iiuc science faculty", "iiuc bba", "iiuc law", "iiuc admin"]
+                                        
+                                        each optn in bookedLocation 
+                                            option(value=optn) #{optn}
+
+                                .bicycle__booking-group
+                                    button.btn.btn__next Book
+                                    input#booking__bicycle-id(type="hidden" value=(bicycle && bicycle.id))
+
+
+        else if bookedBikeIds.includes(bicycle.id)
+            +actionBox("This bicycle is already booked", "#")
+        else
+            +actionBox("see your bicycle booking details", `/bicycle/${bicycle.id}/booking-details`)
+
+
+    else 
+        +actionBox("Please Log in to book this bicycle", "/login")

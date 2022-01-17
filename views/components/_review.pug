@@ -1,0 +1,17 @@
+mixin review(rev)
+    .bicycle__review-given
+        .bicycle__review-header
+            .bicycle__review-author
+                img(src=`/img/users/${rev.user.photo}` class="user-photo" alt=rev.user.name)
+                .bicycle__review-author--name
+                    span= rev.user.name
+            .bicycle__review-details
+                .bicycle__review-details--star(title=`Rated ${rev.rating} Out of 5 stars`)
+                    = `★`.repeat(rev.rating)
+                    = `☆`.repeat(5 - rev.rating)
+
+                .bicycle__review-details--time
+                    time(datetime=rev.created)= h.moment(rev.updatedAt).fromNow()
+
+        .bicycle__review-body
+            p.bicycle__review-body--text= rev.review

@@ -1,0 +1,7 @@
+
+
+extends baseEmail
+block emailContent
+    p Hi #{firstName},
+        p You booked bicycle for #{url.bicycle.name}
+        p: a(href="/me#tab-bookings")  Go to your account

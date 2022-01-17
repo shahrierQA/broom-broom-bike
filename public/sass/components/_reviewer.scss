@@ -1,0 +1,141 @@
+.bicycle__review {
+  &-heading {
+    width: 80%;
+    margin: 0 auto;
+    margin-bottom: 2.5rem;
+  }
+
+  &-box {
+    width: 80%;
+    margin: 0 auto;
+  }
+  &-form {
+    width: 100%;
+    box-shadow: 0 0px 10px rgba(0, 0, 0, 0.2);
+
+    textarea {
+      border: 0;
+      outline: 0;
+      font-size: 2rem;
+      padding: 2rem;
+      height: 220px;
+      width: 100%;
+    }
+  }
+  &-stars {
+    display: flex;
+    justify-content: center;
+
+    input {
+      display: none;
+      &:checked {
+        & ~ label {
+          color: $color-secondary-dark;
+        }
+      }
+      & + label {
+        font-size: 0;
+        &:before {
+          content: '★';
+          font-size: 2.5rem;
+        }
+        &[for='star5'] {
+          order: 5;
+        }
+        &[for='star4'] {
+          order: 4;
+        }
+        &[for='star3'] {
+          order: 3;
+        }
+        &[for='star2'] {
+          order: 2;
+        }
+        &[for='star1'] {
+          order: 1;
+        }
+        &:hover,
+        &:hover ~ label {
+          color: lighten($color-secondary-dark, 20%);
+        }
+      }
+    }
+  }
+
+  &-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid $grey;
+    padding: 0.5rem 0;
+    & > .bicycle__review-stars {
+      flex: 1;
+    }
+
+    .btn__review {
+      flex: 0.5;
+    }
+  }
+
+  &-writtings {
+    margin-top: 4rem;
+  }
+
+  &-given {
+    width: 75%;
+    margin: 0 auto;
+    margin-top: 4rem;
+  }
+
+  &-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &-author {
+    display: flex;
+    align-items: center;
+
+    margin-right: 4rem;
+
+    &--name {
+      span {
+        text-decoration: none;
+        font-size: 1.9rem;
+        padding-left: 1.5rem;
+        font-weight: 600;
+        color: $color-black;
+      }
+    }
+
+    img {
+      height: 4.5rem;
+      width: 4.5rem;
+      border-radius: 50%;
+    }
+  }
+
+  &-details {
+    display: flex;
+    align-items: center;
+
+    font-size: 1.8rem;
+
+    &--time {
+      padding-left: 1.5rem;
+    }
+
+    &--star {
+      color: $color-secondary-dark;
+    }
+  }
+
+  &-body {
+    margin-top: 2.5rem;
+
+    &--text {
+      font-size: 2rem;
+    }
+  }
+}

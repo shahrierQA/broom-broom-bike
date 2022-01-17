@@ -1,0 +1,72 @@
+include ../components/_head
+include ../components/profile-content
+
+body.profile__main
+    section.profile 
+        .container
+            .profile__content 
+                .profile__content-header 
+                    .profile__header-box 
+                       
+                        .profile__header-author 
+                            .profile__header-author--img
+                                img(src=`/img/users/${currUser.photo}`, alt="")
+                            .profile__header-author--name 
+                                span= currUser.name
+
+                        .profile__header-logo
+                            .profile__header-logo--img
+                                a(href="/") 
+                                    img(src="/img/main-logo.png", alt="")
+                        
+                        .profile__header-others 
+                            .profile__header-others--btn 
+                                button(type="button")#user-logout Log Out
+                
+
+                .profile__content-tab
+                    .profile__tab-box.tabs-nav
+                        ul.profile__tab-menu 
+                            li.profile__tab-list.active
+                                a(href='#tab-profile').profile__tab-list--link Profile
+                            li.profile__tab-list   
+                                a(href='#tab-security').profile__tab-list--link Account Security
+                            li.profile__tab-list   
+                                a(href='#tab-bookings').profile__tab-list--link My Booking
+
+                            if currUser.role === 'admin'
+                                h5.heading__penta Admin
+                                li.profile__tab-list 
+                                    a(href="#tab-add-bicycle").profile__tab-list--link Add Bicycle 
+              
+
+                        .profile__tab-body.tabs-content
+                            #tab-profile.tab-box
+                               +updateProfileForm()
+
+                            #tab-security.tab-box
+                               +updatePasswordForm()
+
+                            #tab-bookings.tab-box
+                               +userBookings(bookings)
+
+                            #tab-add-bicycle.tab-box
+                                +addBicycle()
+
+
+
+
+
+
+
+
+include ../components/_scripts
+
+//-
+    form.form__user-data#form-update-profile
+    .form__group
+        label.form__label(for='name') Name
+        input#name.form__input(type='text', value=``, required)
+    .form__group 
+        label.form__label(for='email') Email address
+        input#email.form__input(type='email', value=``, required)

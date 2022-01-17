@@ -1,0 +1,94 @@
+mixin updatePasswordForm()
+    h4.heading__quarter Changed your password
+    form.form.form__user-data#form-update-password
+        .form__group
+            label.form__label(for='name') Current Password
+            input#current-password.form__input(type='password', required)
+        .form__group
+            label.form__label(for='name') New Password
+            input#password.form__input(type='password', required)
+
+        .form__group
+            label.form__label(for='name') Confirm New Password
+            input#confirm-password.form__input(type='password', required)
+        .form__group.form__group-btn
+            button.btn.btn__settings#btn-save-password Update Password
+
+
+
+mixin updateProfileForm()
+    - const proName = currUser && currUser.name.split(" ");
+    h4.heading__quarter Profile - 
+        span.profile__user-name= `${proName[0]}`
+    form.form.form__user-data#form-update-profile
+        .form__group
+            label.form__label(for='name') Name
+            input#name.form__input(type='text', value=currUser.name, required)
+        .form__group
+            label.form__label(for='phone') Phone Number
+            input.form__input(type='text', value=currUser.phoneNumber, disabled required)
+        .form__group 
+            label.form__label(for='email') Email address
+            input#email.form__input(type='email', value=currUser.email, required)
+
+        .form__group
+            label.form__label(for='image') Profile Picture
+            .form__photo-upload
+                img.form__user-photo(src=`/img/users/${currUser.photo}`, alt=``)
+                input.form__upload(type='file', accept='image/*', id='photo', name='photo')
+                label(for='photo')
+        .form__group.form__group-btn
+            button.btn.btn__settings#btn-save-profile Update Profile
+
+
+
+mixin addBicycle()
+    h4.heading__quarter Add a Bicycle
+    form.form.form__user-data#form-add-bicycle
+        .form__group
+            label.form__label(for='name') Name
+            input#bike-name.form__input(type='text', value="" required placeholder="Enter a bicycle name")
+        .form__group
+            label.form__label(for='description') Description
+            input#bike-description.form__input(type='text',  value="" required)
+        .form__group
+            label.form__label(for='summary') Summary
+            input#bike-summary.form__input(type='text', value="" required)
+        .form__group
+            label.form__label(for='price') Price
+            input#bike-price.form__input(type='number', value="" required)
+        .form__group
+            label.form__label(for='image') Picture
+            input.form__upload(type='file', accept='image/*', id='image', name='photo')
+            
+
+        .form__group.form__group-btn
+            button.btn.btn__settings#btn-save-bicycle Add Bicycle
+
+
+
+mixin userBookings(bookings)
+    h4.heading__quarter My Booking 
+    .user__bookings
+        .user__bookings-content 
+
+            if bookings.length === 0
+                h5.heading__penta.text-center Currently you haven't any booked bicycle
+                    p: a(href="/") Home
+
+            each booking in bookings
+                .user__bookings-card
+                    .user__bookings-img
+                        img(src=`/img/bicycles/${booking.bicycle.imageCover}`, alt="")
+                    .user__bookings-text 
+                        a(href="") 
+                            h6.heading__penta= booking.bicycle.name
+                        p.bike-price
+                            span Total Price:
+                            span= booking.price
+                        p.bike-bookers 
+                            span Booked by - &nbsp;
+                            span= booking.user.name.split(' ')[1]
+
+
+        

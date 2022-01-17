@@ -1,0 +1,12 @@
+include ../components/_head
+
+main.main
+    .container
+        .error
+            .error__title
+                h2.error__heading Something went wrong!
+            .error__msg= msg
+
+            .error__back
+                p Back to &nbsp;
+                    a(href="/") Home
