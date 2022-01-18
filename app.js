@@ -3,6 +3,7 @@ const express = require("express");
 const morgan = require("morgan");
 const cookieParser = require("cookie-parser");
 const rateLimit = require("express-rate-limit");
+const compression = require("compression");
 
 const AppError = require("./utils/appError");
 const globalErrorHandler = require("./controllers/errorController");
@@ -44,6 +45,8 @@ const limitRequest = (maximumReq) =>
 const requestLimitApi = limitRequest(100);
 const requestLimitAll = limitRequest(200);
 const requestLimitApiForAccount = limitRequest(50);
+
+app.use(compression());
 
 app.use("/api", requestLimitApi);
 app.use("/api/v1/users/login", requestLimitApiForAccount);

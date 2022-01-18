@@ -1,10 +1,10 @@
-import { showAlert } from './alert';
-import axios from 'axios';
+import { showAlert } from "./alert";
+import axios from "axios";
 
 export const postReview = async (review, rating, bicycleId) => {
   try {
     const resPostReview = await axios({
-      method: 'POST',
+      method: "POST",
       url: `/api/v1/bicycle/${bicycleId}/review`,
       data: {
         review,
@@ -12,21 +12,20 @@ export const postReview = async (review, rating, bicycleId) => {
       },
     });
 
-    if (resPostReview.data.status === 'success') {
-      showAlert('success', 'Posted a review successfully');
+    if (resPostReview.data.status === "success") {
+      showAlert("success", "Posted a review successfully");
 
       window.location.reload();
     }
   } catch (err) {
-    showAlert('error', err.response.data.message);
-    // console.log(err.response);
+    showAlert("error", err.response.data.message);
   }
 };
 
 export const editReview = async (review, rating, bicycleId, reviewId) => {
   try {
     const resEditReview = await axios({
-      method: 'PATCH',
+      method: "PATCH",
       url: `/api/v1/bicycle/${bicycleId}/review/edit/${reviewId}`,
       data: {
         review,
@@ -34,13 +33,12 @@ export const editReview = async (review, rating, bicycleId, reviewId) => {
       },
     });
 
-    if (resEditReview.data.status === 'success') {
-      showAlert('success', 'updated review successfully');
+    if (resEditReview.data.status === "success") {
+      showAlert("success", "updated review successfully");
 
       window.location.reload();
     }
   } catch (err) {
-    showAlert('error', err.response.data.message);
-    // console.log(err.response);
+    showAlert("error", err.response.data.message);
   }
 };
