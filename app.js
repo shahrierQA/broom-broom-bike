@@ -46,8 +46,6 @@ const requestLimitApi = limitRequest(100);
 const requestLimitAll = limitRequest(200);
 const requestLimitApiForAccount = limitRequest(50);
 
-app.use(compression());
-
 app.use("/api", requestLimitApi);
 app.use("/api/v1/users/login", requestLimitApiForAccount);
 app.use("/api/v1/users/signup", requestLimitApiForAccount);
@@ -63,6 +61,8 @@ app.use((req, res, next) => {
   res.locals.h = helpers;
   next();
 });
+
+app.use(compression());
 
 // mounting routes
 app.use("/", viewRouter);
