@@ -15,12 +15,18 @@ exports.getBikeIds = catchError(async (req, res, next) => {
   const detailsPromise = bookingDetailsModel.find();
 
   const [book, details] = await Promise.all([bookPromise, detailsPromise]);
+  console.log(details);
 
   const bookedIds = book.map((el) => el.bicycle.id);
   const detailsIds = details.map((el) => el.bicycle.id);
+  const bookUserIds = book.map((el) => el.user.id);
+  // const detailsUserIds = detailsIds.map((el) => el.user.id);
+  // console.log(detailsUserIds);
 
   res.locals.bookedIds = bookedIds;
   res.locals.detailsIds = detailsIds;
+  res.locals.bookUserIds = bookUserIds;
+  // res.locals.detailsUserIds = detailsUserIds;
 
   next();
 });
@@ -129,20 +135,25 @@ exports.getBicycleBySlug = catchError(async (req, res, next) => {
 });
 
 exports.getBicycleBookingDetails = catchError(async (req, res, next) => {
-  const detailsBooking = await bookingDetailsModel.findOne({
-    bicycle: req.params.bicycleId,
-  });
+  // const detailsBooking = await bookingDetailsModel.findOne({
+  //   bicycle: req.params.bicycleId,
+  //   user: req.CurrentUser.id,
+  // });
 
-  const bookings = await BookingModel.findOne({
-    bicycle: req.params.bicycleId,
-  });
+  // const bookings = await BookingModel.findOne({
+  //   bicycle: req.params.bicycleId,
+  //   user: req.CurrentUser.id,
+  // });
 
-  if (detailsBooking && bookings) {
-    return res.redirect("/bikes");
-  }
+  // console.log(detailsBooking);
+  // console.log("BIcycle", bookings);
+
+  // if (detailsBooking || bookings) {
+  //   return res.redirect("/bikes");
+  // }
 
   res.status(200).render("pages/bookingDetails", {
-    title: "Booking Details - " + detailsBooking.bicycle.name,
+    // title: "Booking Details - " + detailsBooking.bicycle.name,
     detailsBooking,
   });
 });

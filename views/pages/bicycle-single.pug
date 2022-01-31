@@ -99,9 +99,12 @@ block content
                                     button.btn.btn__next Book
                                     input#booking__bicycle-id(type="hidden" value=(bicycle && bicycle.id))
 
-
+        
         else if bookedIds.includes(bicycle.id)
             +actionBox("This bicycle is already booked", "#")
+        //- else if detailsIds.includes(bicycle.id)
+        //-     +actionBox("This bicycle is choosed by someone", "#")
+
         else
             +actionBox("see your bicycle booking details", `/bicycle/${bicycle.id}/booking-details`)
 

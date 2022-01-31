@@ -1210,7 +1210,7 @@ select::-ms-expand {
 .account__system {
   padding: 5rem 0; }
   .account__system-heading .heading::after {
-    content: '';
+    content: "";
     display: block;
     width: 120px;
     height: 3px;
@@ -1222,8 +1222,14 @@ select::-ms-expand {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.445), 0 4px 6px -2px rgba(0, 0, 0, 0.404);
     overflow: hidden; }
+    @media (max-width: 75em) {
+      .account__system-box {
+        grid-template-columns: repeat(1, 1fr); } }
   .account__system-acc {
     padding: 8rem 5rem; }
+  @media (max-width: 75em) {
+    .account__system-banner {
+      display: none; } }
   .account__system-banner--img {
     background-image: linear-gradient(to left, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5)), url("../img/account-banner.jpg");
     height: 100%;
