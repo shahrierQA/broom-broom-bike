@@ -1,6 +1,7 @@
+
+/public
 /node_modules
 .cache
 *.log
 *.env
 
-/public/js/bundle
