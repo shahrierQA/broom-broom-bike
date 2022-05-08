@@ -3,6 +3,4 @@
 *.log
 *.env
 
-/public/main
-.parcel-cache
-/bundle
+/public/js/bundle
