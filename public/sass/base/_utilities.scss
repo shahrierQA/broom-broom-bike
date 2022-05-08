@@ -1,0 +1,66 @@
+.alert {
+  text-align: center;
+  font-size: 2.3rem;
+  padding: 1.5rem 5rem;
+  font-weight: 500;
+  letter-spacing: 0.1rem;
+  color: white;
+  overflow: hidden;
+  border-radius: 7px;
+  max-width: 40%;
+  position: fixed;
+  right: 40px;
+  bottom: 60px;
+  z-index: 9999;
+
+  &--success {
+    background-color: $color-alert-success;
+  }
+
+  &--error {
+    background-color: $color-alert-error;
+  }
+}
+
+a:link,
+a:visited {
+  text-decoration: none;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.action__box {
+  width: 70%;
+  @include respond(tab-land) {
+    width: 100%;
+  }
+  margin: 0 auto;
+  background: $color-primary-dark;
+  padding: 5rem;
+  border-radius: 7px;
+  box-shadow: rgba($color-primary, 0.2) 0px 48px 100px 0px;
+
+  &-info {
+    text-align: center;
+
+    .btn__action {
+      width: 100%;
+      padding: 1rem;
+      background: $color-primary;
+    }
+
+    @include respond(tab-port) {
+      .btn__action {
+        padding: 0;
+        background: none;
+      }
+    }
+  }
+}
+
+.nice-time {
+  font-weight: bold;
+  color: black;
+}
