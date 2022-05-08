@@ -1,13 +1,10 @@
 const { promisify } = require("util");
 const JWT = require("jsonwebtoken");
 const crypto = require("crypto");
-const helpers = require("../utils/helpers");
 const UserModel = require("../models/userModel");
 const catchError = require("../utils/catchError");
 const AppError = require("../utils/appError");
 const Email = require("../utils/email");
-const BookingModel = require("../models/bookingModel");
-const BookingDetailsModel = require("../models/detailsModel");
 const moment = require("moment");
 
 const { createSendToken } = require("../utils/signToken");

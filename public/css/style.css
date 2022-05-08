@@ -1344,7 +1344,7 @@ select::-ms-expand {
 
 .profile__content {
   z-index: 1;
-  width: 80%;
+  width: 90%;
   margin: 0 auto; }
   .profile__content .profile__header-box {
     display: grid;
@@ -1372,7 +1372,7 @@ select::-ms-expand {
     display: flex;
     justify-content: flex-end; }
     .profile__content .profile__header-others--btn button {
-      font-size: 1.7rem;
+      font-size: 1.4rem;
       background-color: #153750;
       border: 1px solid #153750;
       color: white;
@@ -1406,7 +1406,7 @@ select::-ms-expand {
         display: flex;
         align-items: center;
         text-decoration: none;
-        font-size: 2rem;
+        font-size: 1.6rem;
         transition: all 0.3s;
         color: #777;
         font-weight: 500; }
@@ -1432,20 +1432,20 @@ select::-ms-expand {
 
 .profile__tab-body .form__label {
   display: block;
-  font-size: 2rem;
+  font-size: 1.6rem;
   font-weight: 600;
   color: #333;
   margin-bottom: 0.5rem; }
 
 .profile__tab-body .form__input {
   width: 100%;
-  font-size: 1.7rem;
-  padding: 0 2rem;
+  font-size: 1.5rem;
+  padding: 0 1.2rem;
   height: 4.5rem;
   border-radius: 6px;
   border: 1px solid #ebebeb;
   transition: border 0.2s linear 0s, box-shadow 0.2s linear 0s; }
-  .profile__tab-body .form__input[type='text']:disabled {
+  .profile__tab-body .form__input[type="text"]:disabled {
     border: none;
     background: #dddddd; }
   .profile__tab-body .form__input:focus {
@@ -1479,13 +1479,13 @@ select::-ms-expand {
     text-transform: capitalize;
     color: #153750; }
   .user__bookings-text .bike-price {
-    font-size: 1.9rem;
+    font-size: 1.4rem;
     font-weight: 500; }
     .user__bookings-text .bike-price span:last-child {
       font-weight: bold;
       padding-left: 0.5rem; }
   .user__bookings-text .bike-bookers {
-    font-size: 1.9rem;
+    font-size: 1.5rem;
     font-weight: 500; }
     .user__bookings-text .bike-bookers span:last-child {
       font-weight: bold;

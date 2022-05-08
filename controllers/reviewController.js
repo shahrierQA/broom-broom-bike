@@ -1,7 +1,7 @@
-const ReviewModel = require('../models/reviewModel');
-const factory = require('./handlerFactory');
-const catchError = require('../utils/catchError');
-const AppError = require('../utils/appError');
+const ReviewModel = require("../models/reviewModel");
+const factory = require("./handlerFactory");
+const catchError = require("../utils/catchError");
+const AppError = require("../utils/appError");
 
 exports.createReview = catchError(async (req, res, next) => {
   let { review, rating, bicycle, user } = req.body;
@@ -10,13 +10,10 @@ exports.createReview = catchError(async (req, res, next) => {
   if (!user) user = req.CurrentUser.id;
 
   if (!review || !rating)
-    return next(new AppError('Field should not be empty', 400));
+    return next(new AppError("Field should not be empty", 400));
 
-  // const findRev = await ReviewModel.findOne({ user: req.CurrentUser.id });
-
-  // if (findRev) {
-  //   return next(new AppError('Review already exist for this user'));
-  // }
+  const findRev = await ReviewModel.findOne({ user: req.CurrentUser.id });
+  if (findRev) return next(new AppError("You already reviewed", 400));
 
   const postReview = await ReviewModel.create({
     review,
@@ -26,7 +23,7 @@ exports.createReview = catchError(async (req, res, next) => {
   });
 
   return res.status(201).json({
-    status: 'success',
+    status: "success",
     data: {
       postReview,
     },
@@ -44,7 +41,7 @@ exports.editReview = catchError(async (req, res, next) => {
   let { review, rating } = req.body;
 
   if (!review || !rating)
-    return next(new AppError('Field should not be empty', 400));
+    return next(new AppError("Field should not be empty", 400));
 
   const existReview = await ReviewModel.findOne({ user: req.CurrentUser.id });
 
@@ -55,15 +52,12 @@ exports.editReview = catchError(async (req, res, next) => {
   );
 
   return res.status(200).json({
-    status: 'success',
+    status: "success",
     data: {
       editedReview,
     },
   });
 });
-
-// FOR CREATING A REVIEW
-exports.createReview = factory.creatOne(ReviewModel);
 
 // FOR GETTING ALL REVIEW
 exports.getAllReview = factory.getAll(ReviewModel);

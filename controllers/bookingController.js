@@ -1,12 +1,12 @@
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
-const BookingModel = require('../models/bookingModel');
-const factory = require('./handlerFactory');
-const catchError = require('../utils/catchError');
-const BookingDetailsModel = require('../models/detailsModel');
-const BicycleModel = require('../models/bicycleModel');
-const AppError = require('../utils/appError');
-const Email = require('../utils/email');
+const BookingModel = require("../models/bookingModel");
+const factory = require("./handlerFactory");
+const catchError = require("../utils/catchError");
+const BookingDetailsModel = require("../models/detailsModel");
+const BicycleModel = require("../models/bicycleModel");
+const AppError = require("../utils/appError");
+const Email = require("../utils/email");
 
 exports.createBookings = factory.creatOne(BookingModel);
 exports.getAllBookings = factory.getAll(BookingModel);
@@ -30,10 +30,10 @@ exports.bookingDetails = catchError(async (req, res, next) => {
     bookedUserPromise,
   ]);
 
-  if (booked) return next(new AppError('This bicycle is already booked', 400));
+  if (booked) return next(new AppError("This bicycle is already booked", 400));
 
   if (bookedUser)
-    return next(new AppError('You already choose a bicycle!', 400));
+    return next(new AppError("You already choose a bicycle!", 400));
 
   const bookingDetails = await BookingDetailsModel.create({
     pickUpLocation,
@@ -44,7 +44,7 @@ exports.bookingDetails = catchError(async (req, res, next) => {
   });
 
   return res.status(201).json({
-    status: 'success',
+    status: "success",
     data: {
       bookingDetails,
     },
@@ -59,7 +59,7 @@ exports.resetBookingDetails = catchError(async (req, res, next) => {
   });
 
   res.status(204).json({
-    status: 'success',
+    status: "success",
     data: null,
   });
 });
@@ -85,15 +85,15 @@ exports.getCheckoutSession = catchError(async (req, res, next) => {
     bookingDetails.bookedForHours;
 
   if (!bookingDetails)
-    return next(new AppError('Please provide your booking details!', 400));
+    return next(new AppError("Please provide your booking details!", 400));
 
   const bookingCheckoutSession = await stripe.checkout.sessions.create({
     // information about session
-    payment_method_types: ['card'],
+    payment_method_types: ["card"],
     success_url: `${req.protocol}://${req.get(
-      'host'
+      "host"
     )}/?bicycle=${bicycleId}&user=${req.CurrentUser.id}&price=${totalPrice}`,
-    cancel_url: `${req.protocol}://${req.get('host')}/bicycle/${
+    cancel_url: `${req.protocol}://${req.get("host")}/bicycle/${
       bookingBicycle.slug
     }`,
 
@@ -106,17 +106,17 @@ exports.getCheckoutSession = catchError(async (req, res, next) => {
         name: `${bookingBicycle.name}`,
         description: `${bookingBicycle.summary}`,
         images: [
-          'https://www.bicyclebd.com/images/products/Duranta%20%20CB%20MTB26%20Xavier%20R-1903.jpg',
+          "https://www.bicyclebd.com/images/products/Duranta%20%20CB%20MTB26%20Xavier%20R-1903.jpg",
         ],
         amount: bookingBicycle.price * 100 * bookingDetails.bookedForHours,
-        currency: 'USD',
+        currency: "USD",
         quantity: bookingDetails.quantity,
       },
     ],
   });
 
   res.status(200).json({
-    status: 'success',
+    status: "success",
     bookingCheckoutSession,
   });
 });
@@ -144,5 +144,5 @@ exports.createBookingCheckout = catchError(async (req, res, next) => {
 
   await new Email(currentBooking.user, currentBooking).newBicycleBooked();
 
-  res.redirect(req.originalUrl.split('?')[0]);
+  res.redirect(req.originalUrl.split("?")[0]);
 });

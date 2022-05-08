@@ -26,7 +26,6 @@ const bicycleBookBtn = document.getElementById("book-btn");
 if (bicycleBookBtn) {
   bicycleBookBtn.addEventListener("click", (e) => {
     e.target.textContent = "Processing...";
-
     const { bikeId } = e.target.dataset;
 
     bookBicycle(bikeId);
@@ -36,6 +35,9 @@ if (bicycleBookBtn) {
 if (bookingBiycleForm) {
   bookingBiycleForm.addEventListener("submit", (e) => {
     e.preventDefault();
+
+    document.getElementById("btn__action-book").innerHTML =
+      '<i class="fas fa-spinner fa-pulse"></i>';
 
     const bookedForHours = document.querySelector(".input-booked-for").value;
     const pickupLocation = document.querySelector(
@@ -50,6 +52,8 @@ if (bookingBiycleForm) {
 
 if (resetDetails) {
   resetDetails.addEventListener("click", () => {
+    document.getElementById("reset-booking-details").innerHTML =
+      'Resetting <i class="fas fa-spinner fa-pulse"></i>';
     const bicycleSlug = document.getElementById("bicycle-slug").value;
     const bicycleId = document.getElementById("bicycle-id").value;
 
@@ -64,6 +68,9 @@ const addBiycleForm = document.getElementById("form-add-bicycle");
 if (signupForm) {
   signupForm.addEventListener("submit", (e) => {
     e.preventDefault();
+
+    document.getElementById("btn__action-signup").innerHTML =
+      'Signing in <i class="fas fa-spinner fa-pulse"></i>';
 
     const name = document.getElementById("name").value;
     const email = document.getElementById("email").value;
@@ -81,7 +88,7 @@ if (loginForm) {
     e.preventDefault();
 
     document.getElementById("btn__action-login").innerHTML =
-      'Log in <i class="fas fa-spinner fa-pulse"></i>';
+      'Logging in <i class="fas fa-spinner fa-pulse"></i>';
 
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;

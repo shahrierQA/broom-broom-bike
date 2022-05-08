@@ -2,6 +2,7 @@ import { showAlert } from "./alert";
 import axios from "axios";
 
 export const postReview = async (review, rating, bicycleId) => {
+  console.log("dfsfdfs", review, rating, bicycleId);
   try {
     const resPostReview = await axios({
       method: "POST",

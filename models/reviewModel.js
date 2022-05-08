@@ -1,11 +1,11 @@
-const mongoose = require('mongoose');
-const BicycleModel = require('./bicycleModel');
+const mongoose = require("mongoose");
+const BicycleModel = require("./bicycleModel");
 
 const reviewSchema = new mongoose.Schema(
   {
     review: {
       type: String,
-      required: [true, 'Review cannot be empty'],
+      required: [true, "Review cannot be empty"],
     },
     rating: {
       type: Number,
@@ -14,12 +14,12 @@ const reviewSchema = new mongoose.Schema(
     },
     bicycle: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Bicycle',
+      ref: "Bicycle",
       required: true,
     },
     user: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'User',
+      ref: "User",
       required: true,
     },
   },
@@ -35,8 +35,8 @@ reviewSchema.index({ bicycle: 1, user: 1 }, { unique: true });
 // query middleware -- populating reviews with bicycle and user data
 reviewSchema.pre(/^find/, function (next) {
   this.populate({
-    path: 'user',
-    select: 'name photo',
+    path: "user",
+    select: "name photo",
   });
 
   next();
@@ -49,9 +49,9 @@ reviewSchema.statics.calcAverageRatings = async function (bicycleId) {
     },
     {
       $group: {
-        _id: '$bicycle',
+        _id: "$bicycle",
         nRating: { $sum: 1 },
-        avgRating: { $avg: '$rating' },
+        avgRating: { $avg: "$rating" },
       },
     },
   ]);
@@ -67,7 +67,7 @@ reviewSchema.statics.calcAverageRatings = async function (bicycleId) {
   }
 };
 
-reviewSchema.post('save', function () {
+reviewSchema.post("save", function () {
   this.constructor.calcAverageRatings(this.bicycle);
 });
 
@@ -82,5 +82,5 @@ reviewSchema.post(/^findOneAnd/, async function () {
   );
 });
 
-const ReviewModel = mongoose.model('Review', reviewSchema);
+const ReviewModel = mongoose.model("Review", reviewSchema);
 module.exports = ReviewModel;

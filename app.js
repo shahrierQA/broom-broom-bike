@@ -52,9 +52,7 @@ app.use("/api/v1/users/signup", requestLimitApiForAccount);
 app.use("/", requestLimitAll);
 
 app.use(express.json());
-
 app.use(cookieParser());
-
 app.use(express.urlencoded({ extended: true }));
 
 app.use((req, res, next) => {

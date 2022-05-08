@@ -9220,8 +9220,9 @@ var postReview = /*#__PURE__*/function () {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            _context.prev = 0;
-            _context.next = 3;
+            console.log("dfsfdfs", review, rating, bicycleId);
+            _context.prev = 1;
+            _context.next = 4;
             return (0, _axios.default)({
               method: "POST",
               url: "/api/v1/bicycle/".concat(bicycleId, "/review"),
@@ -9231,7 +9232,7 @@ var postReview = /*#__PURE__*/function () {
               }
             });
 
-          case 3:
+          case 4:
             resPostReview = _context.sent;
 
             if (resPostReview.data.status === "success") {
@@ -9239,20 +9240,20 @@ var postReview = /*#__PURE__*/function () {
               window.location.reload();
             }
 
-            _context.next = 10;
+            _context.next = 11;
             break;
 
-          case 7:
-            _context.prev = 7;
-            _context.t0 = _context["catch"](0);
+          case 8:
+            _context.prev = 8;
+            _context.t0 = _context["catch"](1);
             (0, _alert.showAlert)("error", _context.t0.response.data.message);
 
-          case 10:
+          case 11:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, null, [[0, 7]]);
+    }, _callee, null, [[1, 8]]);
   }));
 
   return function postReview(_x, _x2, _x3) {
@@ -9797,6 +9798,7 @@ if (bicycleBookBtn) {
 if (bookingBiycleForm) {
   bookingBiycleForm.addEventListener("submit", function (e) {
     e.preventDefault();
+    document.getElementById("btn__action-book").innerHTML = '<i class="fas fa-spinner fa-pulse"></i>';
     var bookedForHours = document.querySelector(".input-booked-for").value;
     var pickupLocation = document.querySelector(".input-pickup-location").value;
     var quantity = document.querySelector(".input-quantity").value;
@@ -9807,6 +9809,7 @@ if (bookingBiycleForm) {
 
 if (resetDetails) {
   resetDetails.addEventListener("click", function () {
+    document.getElementById("reset-booking-details").innerHTML = 'Resetting <i class="fas fa-spinner fa-pulse"></i>';
     var bicycleSlug = document.getElementById("bicycle-slug").value;
     var bicycleId = document.getElementById("bicycle-id").value;
     (0, _booking.resetBookingDetails)(bicycleSlug, bicycleId);
@@ -9819,6 +9822,7 @@ var addBiycleForm = document.getElementById("form-add-bicycle"); // for signing 
 if (signupForm) {
   signupForm.addEventListener("submit", function (e) {
     e.preventDefault();
+    document.getElementById("btn__action-signup").innerHTML = 'Signing in <i class="fas fa-spinner fa-pulse"></i>';
     var name = document.getElementById("name").value;
     var email = document.getElementById("email").value;
     var password = document.getElementById("password").value;
@@ -9838,7 +9842,7 @@ if (loginForm) {
           switch (_context.prev = _context.next) {
             case 0:
               e.preventDefault();
-              document.getElementById("btn__action-login").innerHTML = 'Log in <i class="fas fa-spinner fa-pulse"></i>';
+              document.getElementById("btn__action-login").innerHTML = 'Logging in <i class="fas fa-spinner fa-pulse"></i>';
               email = document.getElementById("email").value;
               password = document.getElementById("password").value;
               _context.next = 6;
@@ -10090,7 +10094,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61694" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52645" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
