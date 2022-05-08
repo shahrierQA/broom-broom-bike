@@ -4,3 +4,4 @@
 *.env
 
 public/js/bundle
+public/sass
