@@ -16,6 +16,8 @@ const reviewRouter = require("./routers/reviewRouter");
 const helpers = require("./utils/helpers");
 const bookingRouter = require("./routers/bookingRouter");
 
+const { webhookCheckout } = require("./controllers/bookingController");
+
 const app = express();
 
 app.enable("trust proxy");
@@ -59,10 +61,20 @@ app.use("/api/v1/users/login", requestLimitApiForAccount);
 app.use("/api/v1/users/signup", requestLimitApiForAccount);
 app.use("/", requestLimitAll);
 
+/**
+ * Payment for bike
+ */
+app.post(
+  "/webhook-checkout-payment",
+  express.raw({ type: "application/json" }),
+  webhookCheckout
+);
+
+/**
+ * Define body parser
+ */
 app.use(express.json());
-
 app.use(cookieParser());
-
 app.use(express.urlencoded({ extended: true }));
 
 app.use((req, res, next) => {

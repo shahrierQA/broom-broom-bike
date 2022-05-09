@@ -11,11 +11,7 @@ router.get("/signup", viewController.getSignupForm);
 router.use(authController.isAuthenticate);
 router.use(viewController.getBikeIds);
 
-router.get(
-  "/",
-  bookingController.createBookingCheckout,
-  viewController.getHomePage
-);
+router.get("/", viewController.getHomePage);
 
 router.get("/bikes", viewController.getBicyclesPage);
 
