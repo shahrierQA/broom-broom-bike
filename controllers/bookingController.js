@@ -91,9 +91,7 @@ exports.getCheckoutSession = catchError(async (req, res, next) => {
   const bookingCheckoutSession = await stripe.checkout.sessions.create({
     // information about session
     payment_method_types: ["card"],
-    success_url: `${req.protocol}://${req.get(
-      "host"
-    )}/?bicycle=${bicycleId}&user=${req.CurrentUser.id}&price=${totalPrice}`,
+    success_url: `${req.protocol}://${req.get("host")}`,
     cancel_url: `${req.protocol}://${req.get("host")}/bicycle/${
       bookingBicycle.slug
     }`,
@@ -107,7 +105,7 @@ exports.getCheckoutSession = catchError(async (req, res, next) => {
         name: `${bookingBicycle.name}`,
         description: `${bookingBicycle.summary}`,
         images: [
-          "https://www.bicyclebd.com/images/products/Duranta%20%20CB%20MTB26%20Xavier%20R-1903.jpg",
+          `https://broom-broom-bike.herokuapp.com/bicycle/${bookingBicycle.imageCover}`,
         ],
         amount: totalPrice * 100,
         currency: "USD",
@@ -182,7 +180,7 @@ exports.webhookCheckout = (req, res, next) => {
       process.env.STRIPE_WEBHOOK_SECRET
     )
   } catch (err) {
-    res.status(400).send(`Error occured on Webhook: ${err.message}`)
+    return res.status(400).send(`Error occured on Webhook: ${err.message}`)
   }
 
   if (event.type === "checkout.session.completed")
