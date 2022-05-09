@@ -9340,7 +9340,7 @@ var bookingDetails = /*#__PURE__*/function () {
             _context.prev = 0;
             _context.next = 3;
             return (0, _axios.default)({
-              method: 'POST',
+              method: "POST",
               url: "/api/v1/bicycle/".concat(bicycleId, "/booking-details"),
               data: {
                 pickUpLocation: pickUpLocation,
@@ -9352,21 +9352,22 @@ var bookingDetails = /*#__PURE__*/function () {
           case 3:
             resBookingDetails = _context.sent;
 
-            if (resBookingDetails.data.status === 'success') {
+            if (resBookingDetails.data.status === "success") {
               window.setTimeout(function () {
                 window.location.assign("/bicycle/".concat(bicycleId, "/booking-details"));
               }, 500);
             }
 
-            _context.next = 10;
+            _context.next = 11;
             break;
 
           case 7:
             _context.prev = 7;
             _context.t0 = _context["catch"](0);
-            (0, _alert.showAlert)('error', _context.t0.response.data.message);
+            (0, _alert.showAlert)("error", _context.t0.response.data.message);
+            document.getElementById("btn__action-book").innerHTML = "Book";
 
-          case 10:
+          case 11:
           case "end":
             return _context.stop();
         }
@@ -9391,29 +9392,30 @@ var resetBookingDetails = /*#__PURE__*/function () {
             _context2.prev = 0;
             _context2.next = 3;
             return (0, _axios.default)({
-              method: 'DELETE',
+              method: "DELETE",
               url: "/api/v1/bicycle/".concat(bicycleId, "/booking-details/reset-details")
             });
 
           case 3:
             resResetDetails = _context2.sent;
 
-            if (resResetDetails.statusText === 'No Content') {
-              (0, _alert.showAlert)('success', 'Reset your booking process');
+            if (resResetDetails.statusText === "No Content") {
+              (0, _alert.showAlert)("success", "Reset your booking process");
               window.setTimeout(function () {
                 window.location.assign("/bicycle/".concat(bicycleSlug));
               }, 500);
             }
 
-            _context2.next = 10;
+            _context2.next = 11;
             break;
 
           case 7:
             _context2.prev = 7;
             _context2.t0 = _context2["catch"](0);
-            (0, _alert.showAlert)('error', _context2.t0.response.data);
+            (0, _alert.showAlert)("error", _context2.t0.response.data);
+            document.getElementById("reset-booking-details").innerHTML = "Reset Booking Details";
 
-          case 10:
+          case 11:
           case "end":
             return _context2.stop();
         }
@@ -9774,7 +9776,9 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-// DOM elements
+/**
+ * Define DOM Elements
+ */
 var loginForm = document.getElementById("form-login");
 var signupForm = document.getElementById("form-signup");
 var forgotForm = document.getElementById("form-forgotPassword");
@@ -9787,6 +9791,9 @@ var bicycleReviewFormEdit = document.getElementById("form-review-edit");
 var resetDetails = document.getElementById("reset-booking-details");
 var bookingBiycleForm = document.getElementById("bicycle__details-form");
 var bicycleBookBtn = document.getElementById("book-btn");
+/**
+ * Booking a bicycle
+ */
 
 if (bicycleBookBtn) {
   bicycleBookBtn.addEventListener("click", function (e) {
@@ -9795,11 +9802,15 @@ if (bicycleBookBtn) {
     (0, _stripe.bookBicycle)(bikeId);
   });
 }
+/**
+ * Fillup bicycle form to choose a bicycle
+ */
+
 
 if (bookingBiycleForm) {
   bookingBiycleForm.addEventListener("submit", function (e) {
     e.preventDefault();
-    document.getElementById("btn__action-book").innerHTML = '<i class="fas fa-spinner fa-pulse"></i>';
+    document.getElementById("btn__action-book").innerHTML = 'Booking <i class="fas fa-spinner fa-pulse"></i>';
     var bookedForHours = document.querySelector(".input-booked-for").value;
     var pickupLocation = document.querySelector(".input-pickup-location").value;
     var quantity = document.querySelector(".input-quantity").value;
@@ -9807,6 +9818,10 @@ if (bookingBiycleForm) {
     (0, _booking.bookingDetails)(pickupLocation, bicycleId, quantity, bookedForHours);
   });
 }
+/**
+ * Reset bicycle booking details
+ */
+
 
 if (resetDetails) {
   resetDetails.addEventListener("click", function () {
@@ -9815,10 +9830,11 @@ if (resetDetails) {
     var bicycleId = document.getElementById("bicycle-id").value;
     (0, _booking.resetBookingDetails)(bicycleSlug, bicycleId);
   });
-} // for admin
+}
+/**
+ * Signup form
+ */
 
-
-var addBiycleForm = document.getElementById("form-add-bicycle"); // for signing up to new account
 
 if (signupForm) {
   signupForm.addEventListener("submit", function (e) {
@@ -9831,7 +9847,10 @@ if (signupForm) {
     var phoneNumber = document.getElementById("phoneNumber").value;
     (0, _account.signup)(name, email, password, passwordConfirm, phoneNumber);
   });
-} // for login to user account
+}
+/**
+ * For login to user account
+ */
 
 
 if (loginForm) {
@@ -9864,7 +9883,10 @@ if (loginForm) {
       return _ref.apply(this, arguments);
     };
   }());
-} // for forgot user password
+}
+/**
+ * For forgot user password
+ */
 
 
 if (forgotForm) {
@@ -9874,7 +9896,10 @@ if (forgotForm) {
     document.getElementById("send-reset-btn").innerHTML = '<i class="fas fa-spinner fa-pulse"></i>';
     (0, _recoverPassword.forgotPassword)(email);
   });
-} // FOR RESET PASSWORD
+}
+/**
+ * For Reset user password
+ */
 
 
 if (resetForm) {
@@ -9887,8 +9912,15 @@ if (resetForm) {
     (0, _recoverPassword.resetPassword)(password, passwordConfirm, tokenID);
   });
 }
+/**
+ * For logging out
+ */
+
 
 if (logoutBtn) logoutBtn.addEventListener("click", _account.logout);
+/**
+ * For update user data
+ */
 
 if (userProfileForm) {
   userProfileForm.addEventListener("submit", /*#__PURE__*/function () {
@@ -9924,6 +9956,10 @@ if (userProfileForm) {
     };
   }());
 }
+/**
+ * For change user password
+ */
+
 
 if (userPasswordForm) {
   userPasswordForm.addEventListener("submit", /*#__PURE__*/function () {
@@ -9963,7 +9999,10 @@ if (userPasswordForm) {
       return _ref3.apply(this, arguments);
     };
   }());
-} // bicycle review
+}
+/**
+ * Bicycle review submit form
+ */
 
 
 if (bicycleReviewFormCreate) {
@@ -9998,6 +10037,10 @@ if (bicycleReviewFormCreate) {
     };
   }());
 }
+/**
+ * Bicycle review EDIT form
+ */
+
 
 if (bicycleReviewFormEdit) {
   bicycleReviewFormEdit.addEventListener("submit", /*#__PURE__*/function () {
@@ -10031,8 +10074,13 @@ if (bicycleReviewFormEdit) {
       return _ref5.apply(this, arguments);
     };
   }());
-} // for admin panel
+}
+/** FOR Admin
+ * To add a new bicycle
+ */
 
+
+var addBiycleForm = document.getElementById("form-add-bicycle");
 
 if (addBiycleForm) {
   addBiycleForm.addEventListener("submit", /*#__PURE__*/function () {
@@ -10054,7 +10102,7 @@ if (addBiycleForm) {
               return (0, _admin.createBicycle)(form);
 
             case 10:
-              document.getElementById("btn-save-bicycle").innerHTML = '<i class="fas fa-spinner fa-pulse"></i>';
+              document.getElementById("btn-save-bicycle").innerHTML = "Add Bicycle";
 
             case 11:
             case "end":
@@ -10097,7 +10145,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62822" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61473" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

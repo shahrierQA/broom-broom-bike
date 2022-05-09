@@ -11,13 +11,13 @@ body.account__main
                         
                         form.account__system-form#form-resetPassword(autocomplete="off")
                             .form__group
-                                input#password.form__input(type='password', placeholder="Password" required)
+                                input#password.form__input(type='password', placeholder="Password")
                             .form__group
-                                input#passwordConfirm.form__input(type='password', placeholder="Password Confirm" required)
+                                input#passwordConfirm.form__input(type='password', placeholder="Password Confirm")
 
                             .form__group-btn
                                 input(type="hidden" value=`${tokenReset}`)#token__id
-                                button.btn.btn__action.btn__action-login#reset-btn Reset my password
+                                button.btn.btn__action.btn__action-login Reset my password
                         
 
                     

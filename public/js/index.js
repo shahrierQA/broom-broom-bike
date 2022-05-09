@@ -8,7 +8,9 @@ import { postReview, editReview } from "./review";
 import { bookingDetails, resetBookingDetails } from "./booking";
 import { bookBicycle } from "./stripe";
 
-// DOM elements
+/**
+ * Define DOM Elements
+ */
 const loginForm = document.getElementById("form-login");
 const signupForm = document.getElementById("form-signup");
 const forgotForm = document.getElementById("form-forgotPassword");
@@ -20,9 +22,11 @@ const bicycleReviewFormCreate = document.getElementById("form-review-create");
 const bicycleReviewFormEdit = document.getElementById("form-review-edit");
 const resetDetails = document.getElementById("reset-booking-details");
 const bookingBiycleForm = document.getElementById("bicycle__details-form");
-
 const bicycleBookBtn = document.getElementById("book-btn");
 
+/**
+ * Booking a bicycle
+ */
 if (bicycleBookBtn) {
   bicycleBookBtn.addEventListener("click", (e) => {
     e.target.textContent = "Processing...";
@@ -32,12 +36,15 @@ if (bicycleBookBtn) {
   });
 }
 
+/**
+ * Fillup bicycle form to choose a bicycle
+ */
 if (bookingBiycleForm) {
   bookingBiycleForm.addEventListener("submit", (e) => {
     e.preventDefault();
 
     document.getElementById("btn__action-book").innerHTML =
-      '<i class="fas fa-spinner fa-pulse"></i>';
+      'Booking <i class="fas fa-spinner fa-pulse"></i>';
 
     const bookedForHours = document.querySelector(".input-booked-for").value;
     const pickupLocation = document.querySelector(
@@ -50,10 +57,14 @@ if (bookingBiycleForm) {
   });
 }
 
+/**
+ * Reset bicycle booking details
+ */
 if (resetDetails) {
   resetDetails.addEventListener("click", () => {
     document.getElementById("reset-booking-details").innerHTML =
       'Resetting <i class="fas fa-spinner fa-pulse"></i>';
+
     const bicycleSlug = document.getElementById("bicycle-slug").value;
     const bicycleId = document.getElementById("bicycle-id").value;
 
@@ -61,10 +72,9 @@ if (resetDetails) {
   });
 }
 
-// for admin
-const addBiycleForm = document.getElementById("form-add-bicycle");
-
-// for signing up to new account
+/**
+ * Signup form
+ */
 if (signupForm) {
   signupForm.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -82,7 +92,9 @@ if (signupForm) {
   });
 }
 
-// for login to user account
+/**
+ * For login to user account
+ */
 if (loginForm) {
   loginForm.addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -98,7 +110,9 @@ if (loginForm) {
   });
 }
 
-// for forgot user password
+/**
+ * For forgot user password
+ */
 if (forgotForm) {
   forgotForm.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -111,7 +125,9 @@ if (forgotForm) {
   });
 }
 
-// FOR RESET PASSWORD
+/**
+ * For Reset user password
+ */
 if (resetForm) {
   resetForm.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -127,8 +143,14 @@ if (resetForm) {
   });
 }
 
+/**
+ * For logging out
+ */
 if (logoutBtn) logoutBtn.addEventListener("click", logout);
 
+/**
+ * For update user data
+ */
 if (userProfileForm) {
   userProfileForm.addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -148,6 +170,9 @@ if (userProfileForm) {
   });
 }
 
+/**
+ * For change user password
+ */
 if (userPasswordForm) {
   userPasswordForm.addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -172,7 +197,9 @@ if (userPasswordForm) {
   });
 }
 
-// bicycle review
+/**
+ * Bicycle review submit form
+ */
 if (bicycleReviewFormCreate) {
   bicycleReviewFormCreate.addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -190,6 +217,9 @@ if (bicycleReviewFormCreate) {
   });
 }
 
+/**
+ * Bicycle review EDIT form
+ */
 if (bicycleReviewFormEdit) {
   bicycleReviewFormEdit.addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -208,7 +238,10 @@ if (bicycleReviewFormEdit) {
   });
 }
 
-// for admin panel
+/** FOR Admin
+ * To add a new bicycle
+ */
+const addBiycleForm = document.getElementById("form-add-bicycle");
 
 if (addBiycleForm) {
   addBiycleForm.addEventListener("submit", async (e) => {
@@ -230,7 +263,6 @@ if (addBiycleForm) {
 
     await createBicycle(form);
 
-    document.getElementById("btn-save-bicycle").innerHTML =
-      '<i class="fas fa-spinner fa-pulse"></i>';
+    document.getElementById("btn-save-bicycle").innerHTML = "Add Bicycle";
   });
 }
