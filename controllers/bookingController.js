@@ -105,7 +105,9 @@ exports.getCheckoutSession = catchError(async (req, res, next) => {
         name: `${bookingBicycle.name}`,
         description: `${bookingBicycle.summary}`,
         images: [
-          `https://broom-broom-bike.herokuapp.com/bicycle/${bookingBicycle.imageCover}`,
+          `${req.protocol}://${req.get("host")}/img/bicycles/${
+            bookingBicycle.imageCover
+          }`,
         ],
         amount: totalPrice * 100,
         currency: "USD",
@@ -151,7 +153,7 @@ exports.createBookingCheckout = catchError(async (req, res, next) => {
 const createBookingCheckout = async session => {
   const bicycle = session.client_reference_id
   const user = await UserModel.findOne({ email: session.customer_email })
-  const price = session.line_items[0].amount / 100
+  const price = session.amount_total / 100
 
   await BookingModel.create({
     bicycle,
