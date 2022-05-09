@@ -12,31 +12,32 @@ block content
     section.booked__details
         .container
             .booked__details-content 
+            
                 .booked__details-box
 
-                    h3.heading__tertiary Booking Details for - #{details.bicycle.name}
+                    //- h3.heading__tertiary Booking Details for - #{details.bicycle.name}
 
-                    .booked__details-grid
-                        .booked__details-bicycle 
-                            .booked__details-img 
-                                img(src=`/img/bicycles/${details.bicycle.imageCover}`, alt="")
+                    //- .booked__details-grid
+                    //-     .booked__details-bicycle 
+                    //-         .booked__details-img 
+                    //-             img(src=`/img/bicycles/${details.bicycle.imageCover}`, alt="")
 
-                        .booked__details-main
-                            +detailsContent('Price', `BDT ${details.bicycle.price} / hour`)
-                            +detailsContent('Quantity', `${details.quantity}`)
-                            +detailsContent('Booked bicycle for', `${details.bookedForHours} hours`)
+                    //-     .booked__details-main
+                    //-         +detailsContent('Price', `BDT ${details.bicycle.price} / hour`)
+                    //-         +detailsContent('Quantity', `${details.quantity}`)
+                    //-         +detailsContent('Booked bicycle for', `${details.bookedForHours} hours`)
 
-                            +detailsContent('pickup location', `${details.pickUpLocation}`)
+                    //-         +detailsContent('pickup location', `${details.pickUpLocation}`)
 
-                            -const totalPrice = details.bicycle.price * details.quantity * details.bookedForHours
+                    //-         -const totalPrice = details.bicycle.price * details.quantity * details.bookedForHours
 
-                            +detailsContent('Total Price', `BDT ${totalPrice}`)
+                    //-         +detailsContent('Total Price', `BDT ${totalPrice}`)
                             
 
 
-                    .booked__details-action
-                        input#bicycle-slug(type="hidden" value=detailsBooking.bicycle.slug)
-                        input#bicycle-id(type="hidden" value=detailsBooking.bicycle.id)
-                        button.btn.btn__action#reset-booking-details Reset Booking Details
-                        button.btn.btn__action(data-bike-id=`${detailsBooking.bicycle.id}`)#book-btn GoBike
+                    //- .booked__details-action
+                    //-     input#bicycle-slug(type="hidden" value=detailsBooking.bicycle.slug)
+                    //-     input#bicycle-id(type="hidden" value=detailsBooking.bicycle.id)
+                    //-     button.btn.btn__action#reset-booking-details Reset Booking Details
+                    //-     button.btn.btn__action(data-bike-id=`${detailsBooking.bicycle.id}`)#book-btn GoBike
 

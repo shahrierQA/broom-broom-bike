@@ -1,0 +1,85 @@
+// review section
+.review__section {
+  background-color: $color-primary-light;
+  padding: 15rem 0;
+
+  clip-path: polygon(0 15%, 100% 0%, 100% 85%, 0% 100%);
+
+  .heading__secondary {
+    text-align: center;
+    padding-bottom: 12rem;
+    color: $color-grey-dark;
+  }
+}
+.review__content {
+  width: 100rem;
+  margin: 0 auto;
+
+  &-item {
+    border-radius: 8px;
+    background-color: $color-grey-light-1;
+    box-shadow: 3px 3px 5px 6px #e8f1fb;
+    padding-top: 6rem;
+  }
+
+  &-text {
+    font-size: 2.2rem;
+    font-weight: 400;
+    color: $color-grey-dark;
+    letter-spacing: 0.1rem;
+    word-spacing: 0.1rem;
+    line-height: 2;
+    padding: 0 6rem 6rem;
+  }
+
+  &-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 8rem;
+    background: $color-primary;
+  }
+
+  &-author {
+    font-size: 4rem;
+    font-weight: 500;
+    color: white;
+    padding-bottom: 6rem;
+  }
+
+  &-author--img {
+    width: 10rem;
+  }
+}
+
+// carousel
+
+.owl {
+  &-prev,
+  &-next {
+    position: absolute;
+    top: 85px;
+
+    &:active,
+    &:focus {
+      outline: none;
+    }
+
+    span {
+      font-size: 10rem;
+      font-weight: 100;
+      color: rgb(0, 0, 0);
+    }
+  }
+
+  &-prev {
+    left: -75px;
+  }
+
+  &-next {
+    right: -75px;
+  }
+}
+#myCarousel {
+  height: calc(100vh - 105px);
+}

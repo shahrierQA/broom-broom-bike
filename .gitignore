@@ -3,4 +3,4 @@
 *.log
 *.env
 
-public/sass
+.parcel-cache
