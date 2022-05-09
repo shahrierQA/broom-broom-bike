@@ -4,3 +4,5 @@
 *.env
 
 .parcel-cache
+
+public/js/bundle

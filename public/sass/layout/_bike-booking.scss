@@ -1,0 +1,136 @@
+.bicycle__booking {
+  &-header {
+    padding-bottom: 3rem;
+
+    .heading__quarter {
+      color: white;
+    }
+  }
+
+  &-reset {
+    display: flex;
+    justify-content: center;
+    .btn__action {
+      flex: 0.3;
+    }
+  }
+
+  &-box {
+    background: $color-gradient-1;
+    padding: 2rem 4rem;
+    width: 80%;
+    margin: 0 auto;
+    border-radius: 8px;
+  }
+
+  &-form {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    @include respond(tab-land) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include respond(tab-port) {
+      grid-template-columns: repeat(1, 1fr);
+    }
+    gap: 8rem;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &-group {
+    label {
+      display: block;
+      font-size: 2.2rem;
+      color: white;
+    }
+
+    .group-input {
+      width: 100%;
+      height: 4rem;
+      font-size: 2rem;
+      background-color: transparent;
+      border: none;
+      color: white;
+
+      option {
+        background-color: black;
+      }
+
+      &:focus {
+        outline: 0;
+      }
+    }
+  }
+}
+select::-ms-expand {
+  display: none;
+}
+
+.booked__details {
+  &-content {
+    .heading__tertiary {
+      padding-bottom: 4rem;
+    }
+  }
+
+  &-box {
+    width: 70%;
+    margin: 0 auto;
+    margin-top: 6rem;
+    background: $color-gradient-1;
+    padding: 3rem;
+    border-radius: 10px;
+
+    @include respond(tab-land) {
+      width: 90%;
+    }
+
+    @include respond(phone) {
+      width: 100%;
+    }
+  }
+
+  &-img {
+    img {
+      border: 2px solid white;
+      padding: 0.1rem;
+      border-radius: 10px;
+    }
+  }
+
+  &-main {
+    padding: 0 3rem;
+    padding-top: 3rem;
+
+    &--content {
+      display: flex;
+      justify-content: space-between;
+
+      p {
+        color: $color-primary-light;
+        font-size: 2.2rem;
+        padding: 0.5rem 0;
+        font-weight: 500;
+        word-spacing: 0.1rem;
+
+        &:first-child {
+          text-transform: capitalize;
+          color: $color-black;
+        }
+      }
+    }
+  }
+
+  &-action {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6rem;
+    align-items: center;
+    margin-top: 5rem;
+
+    .btn__action:first-child {
+      background-color: $color-danger !important;
+    }
+  }
+}

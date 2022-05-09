@@ -1,0 +1,152 @@
+// select bike section
+.select__bike {
+  &-content {
+    .heading__secondary {
+      text-align: center;
+    }
+
+    &--button {
+      margin-top: 9rem;
+      display: flex;
+      justify-content: center;
+
+      a:link,
+      a:visited {
+        text-decoration: none;
+        color: $color-primary;
+        letter-spacing: 0.1rem;
+        font-size: 2.3rem;
+        font-weight: 500;
+        border: 2px solid $color-primary;
+        border-radius: 4px;
+        padding: 1rem 5rem;
+
+        transition: all 0.3s;
+      }
+
+      a:hover {
+        background-color: $color-primary;
+        color: white;
+      }
+    }
+  }
+
+  &-picture {
+    height: 22rem;
+  }
+
+  &-img {
+    width: 100%;
+    height: 100%;
+    -o-object-fit: cover;
+    object-fit: cover;
+  }
+
+  &-content--box {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    @include respond(tab-land) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include respond(tab-port) {
+      grid-template-columns: repeat(1, 1fr);
+    }
+    grid-gap: 7rem;
+
+    margin-top: 8rem;
+  }
+
+  &-card {
+    border-radius: 3px;
+    overflow: hidden;
+    box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.1);
+    background-color: $color-grey-light-1;
+
+    display: flex;
+    flex-direction: column;
+
+    position: relative;
+  }
+
+  &-main {
+    padding: 2rem;
+
+    .heading__hexa {
+      line-height: 1.5;
+    }
+  }
+
+  &-reason {
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: $color-grey-dark-2;
+  }
+
+  &-name:link,
+  &-name:visited {
+    color: $color-grey-dark-1;
+  }
+
+  &-require {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-top: 1rem;
+  }
+
+  &-price {
+    font-size: 2rem;
+    font-weight: 600;
+    color: $color-grey-dark-1;
+
+    sub {
+      font-weight: 1.8rem;
+      font-weight: 400;
+    }
+  }
+
+  &-rating {
+    font-size: 1.8rem;
+    font-weight: 500;
+    border-radius: 4px;
+    padding: 0.4rem 0.8rem;
+    background-color: #fff6ec;
+    color: #ff9529;
+
+    span:first-child {
+      font-size: 2.2rem;
+      padding-right: 0.5rem;
+    }
+  }
+
+  &-booked--tag,
+  &-choose--tag {
+    span {
+      font-size: 1.7rem;
+      font-weight: bold;
+      letter-spacing: 0.1rem;
+      padding: 0.5rem 1.5rem;
+      border-radius: 7px;
+      color: $color-white;
+
+      position: absolute;
+      top: 5px;
+    }
+  }
+
+  &-booked--tag {
+    span {
+      right: 5px;
+      background-color: $color-alert-success;
+    }
+  }
+
+  &-choose--tag {
+    span {
+      left: 5px;
+      background-color: $yellow;
+    }
+  }
+}
