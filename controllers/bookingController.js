@@ -107,8 +107,8 @@ exports.getCheckoutSession = catchError(async (req, res, next) => {
         images: [
           `https://broom-broom-bike.herokuapp.com/bicycle/${bookingBicycle.imageCover}`,
         ],
-        amount: totalPrice,
-        currency: "BDT",
+        amount: totalPrice * 100,
+        currency: "USD",
         quantity: bookingDetails.quantity,
       },
     ],
