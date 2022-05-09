@@ -8976,8 +8976,8 @@ var forgotPassword = /*#__PURE__*/function () {
             _context.prev = 0;
             _context.next = 3;
             return (0, _axios.default)({
-              method: 'POST',
-              url: '/api/v1/users/forgot-password',
+              method: "POST",
+              url: "/api/v1/users/forgot-password",
               data: {
                 email: email
               }
@@ -8986,10 +8986,10 @@ var forgotPassword = /*#__PURE__*/function () {
           case 3:
             resForgotPassword = _context.sent;
 
-            if (resForgotPassword.data.status === 'success') {
-              (0, _alert.showAlert)('success', 'Check your email for password reset instructions');
+            if (resForgotPassword.data.status === "success") {
+              (0, _alert.showAlert)("success", "Check your email for password reset instructions");
               window.setTimeout(function () {
-                location.assign('/login');
+                location.assign("/login");
               }, 1500);
             }
 
@@ -8999,7 +8999,7 @@ var forgotPassword = /*#__PURE__*/function () {
           case 7:
             _context.prev = 7;
             _context.t0 = _context["catch"](0);
-            (0, _alert.showAlert)('error', _context.t0.response.data.message);
+            (0, _alert.showAlert)("error", _context.t0.response.data.message);
 
           case 10:
           case "end":
@@ -9026,7 +9026,7 @@ var resetPassword = /*#__PURE__*/function () {
             _context2.prev = 0;
             _context2.next = 3;
             return (0, _axios.default)({
-              method: 'PATCH',
+              method: "PATCH",
               url: "/api/v1/users/reset-password/".concat(tokenID),
               data: {
                 password: password,
@@ -9037,22 +9037,23 @@ var resetPassword = /*#__PURE__*/function () {
           case 3:
             resResetPassword = _context2.sent;
 
-            if (resResetPassword.data.status === 'success') {
-              (0, _alert.showAlert)('success', 'Password Reset Successfully');
+            if (resResetPassword.data.status === "success") {
+              (0, _alert.showAlert)("success", "Password Reset Successfully");
               window.setTimeout(function () {
-                location.assign('/');
+                location.assign("/");
               }, 1500);
             }
 
-            _context2.next = 10;
+            _context2.next = 11;
             break;
 
           case 7:
             _context2.prev = 7;
             _context2.t0 = _context2["catch"](0);
-            (0, _alert.showAlert)('error', _context2.t0.response.data.message);
+            (0, _alert.showAlert)("error", _context2.t0.response.data.message);
+            document.getElementById("reset-btn").innerHTML = "Reset my password";
 
-          case 10:
+          case 11:
           case "end":
             return _context2.stop();
         }
@@ -9870,6 +9871,7 @@ if (forgotForm) {
   forgotForm.addEventListener("submit", function (e) {
     e.preventDefault();
     var email = document.getElementById("email").value;
+    document.getElementById("send-reset-btn").innerHTML = '<i class="fas fa-spinner fa-pulse"></i>';
     (0, _recoverPassword.forgotPassword)(email);
   });
 } // FOR RESET PASSWORD
@@ -9881,6 +9883,7 @@ if (resetForm) {
     var password = document.getElementById("password").value;
     var passwordConfirm = document.getElementById("passwordConfirm").value;
     var tokenID = document.getElementById("token__id").value;
+    document.getElementById("reset-btn").innerHTML = '<i class="fas fa-spinner fa-pulse"></i>';
     (0, _recoverPassword.resetPassword)(password, passwordConfirm, tokenID);
   });
 }
@@ -10094,7 +10097,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51702" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62822" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

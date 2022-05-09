@@ -11,10 +11,10 @@ body.account__main
                         
                         form.account__system-form#form-forgotPassword(autocomplete="off")
                             .form__group
-                                input#email.form__input(type='email', placeholder="Email")
+                                input#email.form__input(type='email', placeholder="Email" required)
 
                             .form__group-btn
-                                button.btn.btn__action.btn__action-forgot Send Reset Link
+                                button.btn.btn__action.btn__action-forgot#send-reset-btn Send Reset Link
                         
 
                     include ../components/_accountBanner

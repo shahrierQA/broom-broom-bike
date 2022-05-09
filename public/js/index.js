@@ -104,6 +104,9 @@ if (forgotForm) {
     e.preventDefault();
 
     const email = document.getElementById("email").value;
+
+    document.getElementById("send-reset-btn").innerHTML =
+      '<i class="fas fa-spinner fa-pulse"></i>';
     forgotPassword(email);
   });
 }
@@ -116,6 +119,9 @@ if (resetForm) {
     const password = document.getElementById("password").value;
     const passwordConfirm = document.getElementById("passwordConfirm").value;
     const tokenID = document.getElementById("token__id").value;
+
+    document.getElementById("reset-btn").innerHTML =
+      '<i class="fas fa-spinner fa-pulse"></i>';
 
     resetPassword(password, passwordConfirm, tokenID);
   });

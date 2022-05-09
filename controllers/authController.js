@@ -40,7 +40,7 @@ exports.signUp = catchError(async (req, res, next) => {
   // await new Email(newUser, url).sendWelcome();
 
   // create and send the token
-  createSendToken(newUser, 201, res);
+  createSendToken(newUser, 201, req, res);
 });
 
 // LOGIN USER IMPLEMENTATION
@@ -59,7 +59,7 @@ exports.login = catchError(async (req, res, next) => {
     return next(new AppError("Incorrect Email or Password!", 401));
   }
 
-  createSendToken(loginUser, 200, res);
+  createSendToken(loginUser, 200, req, res);
 });
 
 // PROTECT MIDDLEWARE(PROTECT ROUTE) IMPLEMENTATION
@@ -159,6 +159,7 @@ exports.isAuthenticate = async (req, res, next) => {
 // FORGOT PASSWORD IMPLEMENTATION
 exports.forgotPassword = catchError(async (req, res, next) => {
   const { email } = req.body;
+
   const forgotUser = await UserModel.findOne({ email });
 
   if (!forgotUser)
@@ -232,7 +233,7 @@ exports.resetPassword = catchError(async (req, res, next) => {
 
   await new Email(resetUser, loginUrl).sendPasswordResetSuccessful();
 
-  createSendToken("", 200, res);
+  createSendToken("", 200, req, res);
 });
 
 // FOR UPDATE PASSWORD IMPLEMENTATION
@@ -263,7 +264,7 @@ exports.updatePassword = catchError(async (req, res, next) => {
   updateUser.passwordConfirm = passwordConfirm;
   await updateUser.save();
 
-  createSendToken(updateUser, 200, res);
+  createSendToken(updateUser, 200, req, res);
 });
 
 // FOR LOGOUT IMPLEMENTATION
