@@ -35,9 +35,9 @@ exports.signUp = catchError(async (req, res, next) => {
     phoneNumber,
   });
 
-  const url = `${req.protocol}://${req.get("host")}/me`;
+  // const url = `${req.protocol}://${req.get("host")}/me`;
 
-  await new Email(newUser, url).sendWelcome();
+  // await new Email(newUser, url).sendWelcome();
 
   // create and send the token
   createSendToken(newUser, 201, res);
