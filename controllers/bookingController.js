@@ -150,7 +150,7 @@ exports.createBookingCheckout = catchError(async (req, res, next) => {
 });
 */
 
-const createBookingCheckout = session => {
+const createBookingCheckout = async session => {
   const bicycle = session.client_reference_id
   const user = await UserModel.findOne({ email: session.customer_email })
   const price = session.line_items[0].amount / 100
