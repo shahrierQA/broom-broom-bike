@@ -62,7 +62,7 @@ app.use("/api/v1/users/signup", requestLimitApiForAccount)
 app.use("/", requestLimitAll)
 
 /**
- * Payment for bike
+ * Payment for bike: This routes only work on production
  */
 app.post(
   "/webhook-checkout-payment",

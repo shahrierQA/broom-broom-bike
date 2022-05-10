@@ -8,20 +8,41 @@ const BicycleModel = require("../models/bicycleModel")
 const ReviewModel = require("../models/reviewModel")
 const bookingDetailsModel = require("../models/detailsModel")
 const BookingModel = require("../models/bookingModel")
-// const moment = require('moment');
 
-// exports.alerts = (req, res, next) => {
-//   const { alert } = req.query
-//   if (alert === "booking") {
-//     res.locals.alert =
-//       "Your booking was successfull. Please check your email for a confirmation. If your booking doesn't show up here immediately, please come back later."
-//   }
+exports.alerts = (req, res, next) => {
+  const { alert } = req.query
+  if (alert === "booking") {
+    res.locals.alert =
+      "Your booking was successfull. Please check your email for a confirmation. If your booking doesn't show up here immediately, please come back later."
+  }
 
-//   next()
-// }
+  next()
+}
 
 exports.bookingExpires = catchError(async (req, res, next) => {
-  const booking = await BookingModel.find({})
+  /**
+   * Find all booking bicycles which are expire
+   */
+  const booking = await BookingModel.find({
+    bookingExpiresIn: { $lt: Date.now() },
+  })
+  /**
+   * If all booking bicycles are running, then return to the next middleware
+   */
+  if (booking.length === 0) return next()
+
+  /**
+   * Extract all bicycle from booking documents
+   */
+  const bikes = booking.map(el => el.bicycle)
+
+  /**
+   * And then delete all information about booking from database after they expired.
+   */
+  await BookingModel.deleteMany({ bookingExpiresIn: { $lt: Date.now() } })
+  await bookingDetailsModel.deleteMany({ bicycle: { $in: bikes } })
+
+  next()
 })
 
 exports.getBikeIds = catchError(async (req, res, next) => {

@@ -2,21 +2,23 @@ const {
   getLoginForm,
   getSignupForm,
   getBikeIds,
-  getHomePage,
   getBicyclesPage,
   getForgotForm,
   getResetForm,
+  getHomePage,
   getMyAccount,
   getBicycleBySlug,
   getBicycleBookingDetails,
   alerts,
+  bookingExpires,
 } = require("../controllers/viewController")
 const { isAuthenticate, protect } = require("../controllers/authController")
 const { topBicycles } = require("../controllers/bicycleController")
 
 const router = require("express").Router()
 
-// router.use(alerts)
+router.use(bookingExpires)
+router.use(alerts)
 
 router.get("/login", getLoginForm)
 router.get("/signup", getSignupForm)

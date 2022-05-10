@@ -59,8 +59,6 @@ exports.resetBookingDetails = catchError(async (req, res, next) => {
   })
 })
 
-// exports.bookingStopRideBike = catchError(async (req, res, next) => {});
-
 exports.getCheckoutSession = catchError(async (req, res, next) => {
   const { bicycleId } = req.params
 
@@ -85,7 +83,10 @@ exports.getCheckoutSession = catchError(async (req, res, next) => {
   const bookingCheckoutSession = await stripe.checkout.sessions.create({
     // information about session
     payment_method_types: ["card"],
-    success_url: `${req.protocol}://${req.get("host")}?alert=booking`,
+    // success_url: `${req.protocol}://${req.get("host")}?alert=booking`,
+    success_url: `${req.protocol}://${req.get(
+      "host"
+    )}/?bicycle=${bicycleId}&user=${req.CurrentUser.id}&price=${totalPrice}`,
     cancel_url: `${req.protocol}://${req.get("host")}/bicycle/${
       bookingBicycle.slug
     }`,
@@ -116,35 +117,35 @@ exports.getCheckoutSession = catchError(async (req, res, next) => {
   })
 })
 
-/*
+/**
+ * Create booking checkout: only for development
+ */
 exports.createBookingCheckout = catchError(async (req, res, next) => {
-  const { bicycle, user, price } = req.query;
+  const { bicycle, user, price } = req.query
+  if (!bicycle && !user && !price) return next()
 
-  if (!bicycle && !user && !price) return next();
-
-  // const newBooking = await  BookingModel.create({ bicycle, user, price });
-
-  const newBooking = new BookingModel({
+  const details = await BookingDetailsModel.findOne({ bicycle })
+  await BookingModel.create({
     bicycle,
     user,
     price,
-  });
+    bookingExpiresIn: Date.now() + details.bookedForHours * 60 * 60 * 1000,
+  })
 
-  // newBooking.bookingExpiresIn = Date.now() +
-
-  await newBooking.save();
-
-  const currentBooking = await BookingModel.findOne({ bicycle });
-
+  const currentBooking = await BookingModel.findOne({ bicycle })
   // const url = `${req.protocol}://${req.get('host')}/me`;
+  await new Email(currentBooking.user, currentBooking).newBicycleBooked()
 
-  await new Email(currentBooking.user, currentBooking).newBicycleBooked();
+  res.redirect(req.originalUrl.split("?")[0])
+})
 
-  res.redirect(req.originalUrl.split("?")[0]);
-});
-*/
+///////////////////////////////////////////////////////////////////////////////
+// The following functions are only work on production
 
-const createBookingCheckout = async session => {
+/**
+ * Create booking checkout
+ */
+const createBookingCheckoutWebhook = async session => {
   const bicycle = session.client_reference_id
   const price = session.amount_total / 100
   const user = await UserModel.findOne({ email: session.customer_email })
@@ -183,10 +184,7 @@ exports.webhookCheckout = (req, res, next) => {
   }
 
   if (event.type === "checkout.session.completed")
-    createBookingCheckout(event.data.object)
-
-  res.locals.alert =
-    "Your booking was successfull. Please check your email for a confirmation. If your booking doesn't show up here immediately, please come back later."
+    createBookingCheckoutWebhook(event.data.object)
 
   res.status(200).json({
     received: true,
