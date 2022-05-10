@@ -185,6 +185,9 @@ exports.webhookCheckout = (req, res, next) => {
   if (event.type === "checkout.session.completed")
     createBookingCheckout(event.data.object)
 
+  res.locals.alert =
+    "Your booking was successfull. Please check your email for a confirmation. If your booking doesn't show up here immediately, please come back later."
+
   res.status(200).json({
     received: true,
   })

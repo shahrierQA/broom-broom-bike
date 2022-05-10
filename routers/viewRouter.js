@@ -16,7 +16,7 @@ const { topBicycles } = require("../controllers/bicycleController")
 
 const router = require("express").Router()
 
-router.use(alerts)
+// router.use(alerts)
 
 router.get("/login", getLoginForm)
 router.get("/signup", getSignupForm)
