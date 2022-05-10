@@ -20,7 +20,7 @@ exports.alerts = (req, res, next) => {
 }
 
 exports.bookingExpires = catchError(async (req, res, next) => {
-  if (req.query.alert) res.redirect("/")
+  // if (req.query.alert) res.redirect("/")
 
   /**
    * Find all booking bicycles which are expire
