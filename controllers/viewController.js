@@ -20,6 +20,10 @@ exports.alerts = (req, res, next) => {
   next()
 }
 
+exports.bookingExpires = catchError(async (req, res, next) => {
+  const booking = await BookingModel.find({})
+})
+
 exports.getBikeIds = catchError(async (req, res, next) => {
   const bookPromise = BookingModel.find()
   const detailsPromise = bookingDetailsModel.find()

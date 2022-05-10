@@ -7,6 +7,7 @@ const bookingSchema = new mongoose.Schema(
       ref: "Bicycle",
       required: true,
     },
+    bookingExpiresIn: Date,
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
@@ -20,8 +21,6 @@ const bookingSchema = new mongoose.Schema(
       type: Boolean,
       default: true,
     },
-
-    bookingExpiresIn: Date,
   },
   { timestamps: true }
 )

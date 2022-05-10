@@ -9,12 +9,6 @@ const AppError = require("../utils/appError")
 const Email = require("../utils/email")
 const UserModel = require("../models/userModel")
 
-exports.createBookings = factory.creatOne(BookingModel)
-exports.getAllBookings = factory.getAll(BookingModel)
-exports.getBookings = factory.getOne(BookingModel)
-exports.updateBookings = factory.updateOne(BookingModel)
-exports.deleteBookings = factory.deleteOne(BookingModel)
-
 exports.bookingDetails = catchError(async (req, res, next) => {
   let { pickUpLocation, bicycle, user, bookedForHours, quantity } = req.body
 
@@ -152,13 +146,16 @@ exports.createBookingCheckout = catchError(async (req, res, next) => {
 
 const createBookingCheckout = async session => {
   const bicycle = session.client_reference_id
-  const user = await UserModel.findOne({ email: session.customer_email })
   const price = session.amount_total / 100
+  const user = await UserModel.findOne({ email: session.customer_email })
+
+  const details = await BookingDetailsModel.findOne({ bicycle })
 
   await BookingModel.create({
     bicycle,
     user: user.id,
     price,
+    bookingExpiresIn: Date.now() + details.bookedForHours * 60 * 60 * 1000,
   })
 }
 
