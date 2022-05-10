@@ -1,14 +1,14 @@
-const JWT = require("jsonwebtoken");
+const JWT = require("jsonwebtoken")
 
 // CREATE TOKEN (JWT SIGN) IMPLEMENTATION
-const signToken = (id) => {
+const signToken = id => {
   return JWT.sign({ id }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRES_IN,
-  });
-};
+  })
+}
 
 exports.createSendToken = (user, statusCode, req, res) => {
-  const token = signToken(user._id);
+  const token = signToken(user._id)
 
   res.cookie("jwt", token, {
     expires: new Date(
@@ -16,15 +16,15 @@ exports.createSendToken = (user, statusCode, req, res) => {
     ),
     httpOnly: true,
     secure: req.secure || req.headers["x-forwarded-proto"] === "https",
-  });
+  })
 
   // remove the password from the output
-  user.password = undefined;
+  user.password = undefined
   res.status(statusCode).json({
     status: "success",
     token,
     data: {
       user,
     },
-  });
-};
+  })
+}

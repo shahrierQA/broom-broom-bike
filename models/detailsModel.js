@@ -1,55 +1,55 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose")
 
 const bookingDetailsSchema = new mongoose.Schema(
   {
     bicycle: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Bicycle',
+      ref: "Bicycle",
       required: true,
     },
     user: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'User',
+      ref: "User",
       required: true,
     },
     bookedForHours: {
       type: Number,
-      required: [true, 'Please provide a Booking time!'],
+      required: [true, "Please provide a Booking time!"],
     },
     quantity: {
       type: Number,
-      required: [true, 'Please provide a booking quantity'],
+      required: [true, "Please provide a booking quantity"],
     },
     pickUpLocation: {
       type: String,
-      required: [true, 'Please provide a pickup location'],
+      required: [true, "Please provide a pickup location"],
     },
   },
   {
     timestamps: true,
   }
-);
+)
 
 bookingDetailsSchema.pre(/^find/, function (next) {
   this.populate({
-    path: 'bicycle',
-    select: 'name imageCover slug price',
-  });
+    path: "bicycle",
+    select: "name imageCover slug price",
+  })
 
-  next();
-});
+  next()
+})
 
 bookingDetailsSchema.pre(/^find/, function (next) {
   this.populate({
-    path: 'user',
-    select: 'email',
-  });
+    path: "user",
+    select: "email",
+  })
 
-  next();
-});
+  next()
+})
 
 const bookingDetailsModel = mongoose.model(
-  'BookingDetails',
+  "BookingDetails",
   bookingDetailsSchema
-);
-module.exports = bookingDetailsModel;
+)
+module.exports = bookingDetailsModel
