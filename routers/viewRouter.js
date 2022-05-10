@@ -1,37 +1,46 @@
-const viewController = require("../controllers/viewController");
-const authController = require("../controllers/authController");
-const bicycleController = require("../controllers/bicycleController");
-const bookingController = require("../controllers/bookingController");
+const {
+  getLoginForm,
+  getSignupForm,
+  getBikeIds,
+  getHomePage,
+  getBicyclesPage,
+  getForgotForm,
+  getResetForm,
+  getMyAccount,
+  getBicycleBySlug,
+  getBicycleBookingDetails,
+  alerts,
+} = require("../controllers/viewController")
+const { isAuthenticate, protect } = require("../controllers/authController")
+const { topBicycles } = require("../controllers/bicycleController")
 
-const router = require("express").Router();
+const router = require("express").Router()
 
-router.get("/login", viewController.getLoginForm);
-router.get("/signup", viewController.getSignupForm);
+router.use(alerts)
 
-router.use(authController.isAuthenticate);
-router.use(viewController.getBikeIds);
+router.get("/login", getLoginForm)
+router.get("/signup", getSignupForm)
 
-router.get("/", viewController.getHomePage);
+router.use(isAuthenticate)
+router.use(getBikeIds)
 
-router.get("/bikes", viewController.getBicyclesPage);
+router.get("/", getHomePage)
 
-router.get("/recover", viewController.getForgotForm);
-router.get("/reset-password/:token", viewController.getResetForm);
+router.get("/bikes", getBicyclesPage)
 
-router.get("/me", viewController.getMyAccount);
+router.get("/recover", getForgotForm)
+router.get("/reset-password/:token", getResetForm)
 
-router.get("/bicycle/:slug", viewController.getBicycleBySlug);
+router.get("/me", getMyAccount)
 
-router.get(
-  "/top-five-bicycles",
-  bicycleController.topBicycles,
-  viewController.getBicyclesPage
-);
+router.get("/bicycle/:slug", getBicycleBySlug)
+
+router.get("/top-five-bicycles", topBicycles, getBicyclesPage)
 
 router.get(
   "/bicycle/:bicycleId/booking-details",
-  authController.protect,
-  viewController.getBicycleBookingDetails
-);
+  protect,
+  getBicycleBookingDetails
+)
 
-module.exports = router;
+module.exports = router

@@ -10,6 +10,16 @@ const bookingDetailsModel = require("../models/detailsModel")
 const BookingModel = require("../models/bookingModel")
 // const moment = require('moment');
 
+exports.alerts = (req, res, next) => {
+  const { alert } = req.query
+  if (alert === "booking") {
+    res.locals.alert =
+      "Your booking was successfull. Please check your email for a confirmation. If your booking doesn't show up here immediately, please come back later."
+  }
+
+  next()
+}
+
 exports.getBikeIds = catchError(async (req, res, next) => {
   const bookPromise = BookingModel.find()
   const detailsPromise = bookingDetailsModel.find()
