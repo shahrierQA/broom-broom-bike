@@ -18,10 +18,19 @@ const bookingRouter = require("./routers/bookingRouter")
 
 const { webhookCheckout } = require("./controllers/bookingController")
 
+/**
+ * Initialize app
+ */
 const app = express()
 
+/**
+ * Enable trust proxy
+ */
 app.enable("trust proxy")
 
+/**
+ * Pug setup and read static files
+ */
 app.set("view engine", "pug")
 app.set("views", path.join(__dirname, "views"))
 app.use(express.static(path.join(__dirname, "public")))
@@ -32,7 +41,9 @@ app.use(express.static(path.join(__dirname, "public")))
 app.use(cors())
 app.options("*", cors())
 
-// This is for development logger
+/**
+ * Development logger
+ */
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"))
 }
@@ -51,7 +62,9 @@ const limitRequest = maximumReq =>
     },
   })
 
-// this function does - maximum request in one hour from the same IP
+/**
+ * This function does - maximum request in one hour from the same IP
+ */
 const requestLimitApi = limitRequest(100)
 const requestLimitAll = limitRequest(200)
 const requestLimitApiForAccount = limitRequest(50)
@@ -84,13 +97,18 @@ app.use((req, res, next) => {
 
 app.use(compression())
 
-// mounting routes
+/**
+ * Mount routers
+ */
 app.use("/", viewRouter)
 app.use("/api/v1/users", userRouter)
 app.use("/api/v1/bicycle", bicycleRouter)
 app.use("/api/v1/reviews", reviewRouter)
 app.use("/api/v1/booking", bookingRouter)
 
+/**
+ * Handle Unknown routes for both Development and Production Environment
+ */
 if (process.env.NODE_ENV === "production") {
   app.all("*", (req, res, next) => {
     next(new AppError(`Page Not Found`, 404))
@@ -101,6 +119,9 @@ app.all("*", (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} to this server!`, 404))
 })
 
+/**
+ * Global Error Handler
+ */
 app.use(globalErrorHandler)
 
 module.exports = app

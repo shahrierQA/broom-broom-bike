@@ -9,7 +9,9 @@ const moment = require("moment")
 
 const { createSendToken } = require("../utils/signToken")
 
-// SIGN UP USER IMPLEMENTATION
+/**
+ * SIGN UP USER IMPLEMENTATION
+ */
 exports.signUp = catchError(async (req, res, next) => {
   const { name, email, phoneNumber, password, passwordConfirm } = req.body
 
@@ -43,7 +45,9 @@ exports.signUp = catchError(async (req, res, next) => {
   createSendToken(newUser, 201, req, res)
 })
 
-// LOGIN USER IMPLEMENTATION
+/**
+ * LOGIN USER IMPLEMENTATION
+ */
 exports.login = catchError(async (req, res, next) => {
   const { email, password } = req.body
 
@@ -62,8 +66,10 @@ exports.login = catchError(async (req, res, next) => {
   createSendToken(loginUser, 200, req, res)
 })
 
-// PROTECT MIDDLEWARE(PROTECT ROUTE) IMPLEMENTATION
-/** Here the route is protect for only the login users */
+/**
+ * PROTECT MIDDLEWARE(PROTECT ROUTE) IMPLEMENTATION
+ * Here the route is protect for only the login users
+ */
 exports.protect = catchError(async (req, res, next) => {
   // getting token
   let token
@@ -110,7 +116,9 @@ exports.protect = catchError(async (req, res, next) => {
   next()
 })
 
-// RESTRICT OUR ROUTES FOR CERTAIN ROLE IMPLEMENTATION
+/**
+ * RESTRICT OUR ROUTES FOR CERTAIN ROLE IMPLEMENTATION
+ */
 exports.restrictTo = (...roles) => {
   return (req, res, next) => {
     if (!roles.includes(req.CurrentUser.role)) {
@@ -123,7 +131,9 @@ exports.restrictTo = (...roles) => {
   }
 }
 
-// THIS IS ONLY FOR RENDERING THE PAGE
+/**
+ * THIS IS ONLY FOR RENDERING THE PAGE
+ */
 exports.isAuthenticate = async (req, res, next) => {
   // getting token
   const token = req.cookies.jwt
@@ -153,7 +163,9 @@ exports.isAuthenticate = async (req, res, next) => {
   next()
 }
 
-// FORGOT PASSWORD IMPLEMENTATION
+/**
+ * FORGOT PASSWORD IMPLEMENTATION
+ */
 exports.forgotPassword = catchError(async (req, res, next) => {
   const { email } = req.body
 
@@ -189,7 +201,9 @@ exports.forgotPassword = catchError(async (req, res, next) => {
   }
 })
 
-// RESET PASSWORD IMPLEMENTATION
+/**
+ * RESET PASSWORD IMPLEMENTATION
+ */
 exports.resetPassword = catchError(async (req, res, next) => {
   // get user based on the resetToken
   const hashedToken = crypto
@@ -233,7 +247,9 @@ exports.resetPassword = catchError(async (req, res, next) => {
   createSendToken("", 200, req, res)
 })
 
-// FOR UPDATE PASSWORD IMPLEMENTATION
+/**
+ * FOR UPDATE PASSWORD IMPLEMENTATION
+ */
 exports.updatePassword = catchError(async (req, res, next) => {
   const { passwordCurrent, password, passwordConfirm } = req.body
 
@@ -264,7 +280,9 @@ exports.updatePassword = catchError(async (req, res, next) => {
   createSendToken(updateUser, 200, req, res)
 })
 
-// FOR LOGOUT IMPLEMENTATION
+/**
+ * FOR LOGOUT IMPLEMENTATION
+ */
 exports.logout = (req, res) => {
   res.cookie("jwt", "forgotTOken", {
     expires: new Date(Date.now() + 2 * 1000),
