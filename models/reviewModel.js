@@ -1,5 +1,5 @@
 const mongoose = require("mongoose")
-const BicycleModel = require("./bicycleModel")
+const Bicycle = require("./bicycleModel")
 
 const reviewSchema = new mongoose.Schema(
   {
@@ -38,49 +38,47 @@ reviewSchema.pre(/^find/, function (next) {
     path: "user",
     select: "name photo",
   })
-
   next()
 })
 
-reviewSchema.statics.calcAverageRatings = async function (bicycleId) {
-  const stats = await this.aggregate([
+reviewSchema.statics.calculateAverageRatings = async function (bikeId) {
+  const ratingStats = await this.aggregate([
     {
-      $match: { bicycle: bicycleId },
+      $match: { bicycle: bikeId },
     },
     {
       $group: {
         _id: "$bicycle",
-        nRating: { $sum: 1 },
-        avgRating: { $avg: "$rating" },
+        avgRatings: { $avg: "$rating" },
       },
     },
   ])
 
-  if (stats.length > 0) {
-    await BicycleModel.findByIdAndUpdate(bicycleId, {
-      ratingsAverage: stats[0].avgRating,
+  if (ratingStats.length > 0) {
+    await Bicycle.findByIdAndUpdate(bikeId, {
+      ratingsAverage: ratingStats[0].avgRatings,
     })
   } else {
-    await BicycleModel.findByIdAndUpdate(bicycleId, {
+    await Bicycle.findByIdAndUpdate(bikeId, {
       ratingsAverage: 4.5,
     })
   }
 }
 
 reviewSchema.post("save", function () {
-  this.constructor.calcAverageRatings(this.bicycle)
+  this.constructor.calculateAverageRatings(this.bicycle)
 })
 
-reviewSchema.pre(/^findOneAnd/, async function (next) {
-  this.currentReview = await this.findOne()
-  next()
-})
+// reviewSchema.pre(/^findOneAnd/, async function (next) {
+//   this.currentRev = await this.findOne()
+//   next()
+// })
 
-reviewSchema.post(/^findOneAnd/, async function () {
-  await this.currentReview.constructor.calcAverageRatings(
-    this.currentReview.bicycle
-  )
-})
+// reviewSchema.post(/^findOneAnd/, async function () {
+//   await this.currentRev.constructor.calculateAverageRatings(
+//     this.currentRev.bicycle
+//   )
+// })
 
 const ReviewModel = mongoose.model("Review", reviewSchema)
 module.exports = ReviewModel

@@ -100,8 +100,7 @@
   &-author {
     display: flex;
     align-items: center;
-
-    margin-right: 4rem;
+    margin-right: 2rem;
 
     &--name {
       span {
@@ -110,6 +109,10 @@
         padding-left: 1.5rem;
         font-weight: 600;
         color: $color-black;
+      }
+
+      span.color {
+        color: rgba(37, 123, 204, 0.89);
       }
     }
 

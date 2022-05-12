@@ -162,10 +162,18 @@ exports.getBicycleBySlug = catchError(async (req, res, next) => {
   const findRevs = await ReviewModel.find({ bicycle: bicycle.id })
   const reviewedUserIds = findRevs.map(el => el.user.id)
 
+  let rev
+  if (req.CurrentUser) {
+    rev = await ReviewModel.findOne({
+      $and: [{ user: req.CurrentUser.id }, { bicycle: bicycle.id }],
+    })
+  }
+
   res.status(200).render("pages/bicycle-single", {
     title: bicycle.slug,
     bicycle,
     reviewedUserIds,
+    rev,
   })
 })
 

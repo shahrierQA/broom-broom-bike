@@ -606,13 +606,15 @@ template {
 .bicycle__review-author {
   display: flex;
   align-items: center;
-  margin-right: 4rem; }
+  margin-right: 2rem; }
   .bicycle__review-author--name span {
     text-decoration: none;
     font-size: 1.9rem;
     padding-left: 1.5rem;
     font-weight: 600;
     color: #000; }
+  .bicycle__review-author--name span.color {
+    color: rgba(37, 123, 204, 0.89); }
   .bicycle__review-author img {
     height: 4.5rem;
     width: 4.5rem;

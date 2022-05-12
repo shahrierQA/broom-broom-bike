@@ -1,10 +1,10 @@
-mixin reviewForm(bicycle = {}, reviewPosted)
+mixin reviewForm(rev, bicycle = {}, reviewPosted)
     .bicycle__review-box
 
         - const idname = reviewPosted ? 'form-review-edit' : 'form-review-create'
 
         form.bicycle__review-form(id=idname)
-            textarea#review-text(name="review" placeholder="Did you try this ? Leave a review....")
+            textarea#review-text(name="review" placeholder="Did you try this ? Leave a review....")= reviewPosted && rev && rev.review
 
             .bicycle__review-content
                 .bicycle__review-stars
@@ -14,11 +14,7 @@ mixin reviewForm(bicycle = {}, reviewPosted)
 
                 - const val = reviewPosted ? 'Edit Review' : 'Submit Review'
 
-                input(type="submit" value=val).btn.btn__review#review-rating-btn
                 input(type="hidden" value=bicycle.id)#review-bicycle-id
-                input(type="hidden" value=(222))#review-main-id
-            
-
-
-
-//- (action=`/reviews/${bicycle.id}` method="POST")
+                input(type="hidden" value=rev && rev.id)#review-main-id
+                button(type="submit").btn.btn__review#review-rating-btn= val
+                

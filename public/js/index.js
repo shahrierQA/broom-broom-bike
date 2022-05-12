@@ -157,7 +157,7 @@ if (userProfileForm) {
     e.preventDefault()
 
     document.getElementById("btn-save-profile").innerHTML =
-      '<i class="fas fa-spinner fa-pulse"></i>'
+      'Updating <i class="fas fa-spinner fa-pulse"></i>'
 
     // for programatically creating a multpart/form-data
     const form = new FormData()
@@ -178,7 +178,7 @@ if (userPasswordForm) {
   userPasswordForm.addEventListener("submit", async e => {
     e.preventDefault()
     document.getElementById("btn-save-password").innerHTML =
-      '<i class="fas fa-spinner fa-pulse"></i>'
+      'Updating <i class="fas fa-spinner fa-pulse"></i>'
 
     const passwordCurrent = document.getElementById("current-password").value
     const password = document.getElementById("password").value
@@ -208,7 +208,9 @@ if (bicycleReviewFormCreate) {
       'Submit Review <i class="fas fa-spinner fa-pulse"></i>'
 
     const review = document.getElementById("review-text").value
-    const rating = document.querySelector('input[type="radio"]:checked').value
+    const rating = document.querySelector('input[type="radio"]:checked')
+      ? document.querySelector('input[type="radio"]:checked').value
+      : 0
     const bicycleId = document.getElementById("review-bicycle-id").value
 
     await postReview(review, rating, bicycleId)
@@ -225,10 +227,12 @@ if (bicycleReviewFormEdit) {
     e.preventDefault()
 
     document.getElementById("review-rating-btn").innerHTML =
-      'Edit Review <i class="fas fa-spinner fa-pulse"></i>'
+      'Editing <i class="fas fa-spinner fa-pulse"></i>'
 
     const review = document.getElementById("review-text").value
-    const rating = document.querySelector('input[type="radio"]:checked').value
+    const rating = document.querySelector('input[type="radio"]:checked')
+      ? document.querySelector('input[type="radio"]:checked').value
+      : 0
     const bicycleId = document.getElementById("review-bicycle-id").value
     const reviewId = document.getElementById("review-main-id").value
 

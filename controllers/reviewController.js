@@ -9,10 +9,12 @@ exports.createReview = catchError(async (req, res, next) => {
   if (!bicycle) bicycle = req.params.bicycleId
   if (!user) user = req.CurrentUser.id
 
-  if (!review || !rating)
+  if (!review || rating === 0)
     return next(new AppError("Field should not be empty", 400))
 
-  const findRev = await ReviewModel.findOne({ user: req.CurrentUser.id })
+  const findRev = await ReviewModel.findOne({
+    $and: [{ user: req.CurrentUser.id }, { bicycle }],
+  })
   if (findRev) return next(new AppError("You already reviewed", 400))
 
   const postReview = await ReviewModel.create({
@@ -39,19 +41,19 @@ exports.setIds = (req, res, next) => {
 
 exports.editReview = catchError(async (req, res, next) => {
   let { review, rating } = req.body
+  const { id, bicycleId } = req.params
 
-  if (!review || !rating)
+  if (!review || rating === 0)
     return next(new AppError("Field should not be empty", 400))
 
-  const existReview = await ReviewModel.findOne({ user: req.CurrentUser.id })
-
+  await ReviewModel.calculateAverageRatings(bicycleId)
   const editedReview = await ReviewModel.findByIdAndUpdate(
-    { _id: existReview.id },
+    id,
     { review, rating },
-    { new: true }
+    { new: true, runValidators: true }
   )
 
-  return res.status(200).json({
+  res.status(200).json({
     status: "success",
     data: {
       editedReview,

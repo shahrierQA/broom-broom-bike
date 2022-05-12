@@ -4,7 +4,7 @@ mixin review(rev)
             .bicycle__review-author
                 img(src=`/img/users/${rev.user.photo}` class="user-photo" alt=rev.user.name)
                 .bicycle__review-author--name
-                    span= rev.user.name
+                    span(class=`${currUser.id === rev.user.id ? 'color' : ''}`)= rev.user.name
             .bicycle__review-details
                 .bicycle__review-details--star(title=`Rated ${rev.rating} Out of 5 stars`)
                     = `★`.repeat(rev.rating)

@@ -36,18 +36,18 @@ block content
                 p.bicycle__content-text= bicycle.description
 
 
-    section.bicycle__review 
+    section.bicycle__review
         .container
             if currUser && !reviewedUserIds.includes(currUser.id)
                 .bicycle__review-heading
                     h4.heading__quarter Tell others what you think
-                +reviewForm(bicycle)
+                +reviewForm(rev, bicycle, reviewPosted = false)
             
 
             else if currUser && reviewedUserIds.includes(currUser.id)
                 .bicycle__review-heading
                     h4.heading__quarter Edit your review
-                +reviewForm(bicycle, reviewPosted = true)
+                +reviewForm(rev, bicycle, reviewPosted = true)
 
             //- if bicycle.reviews.length
             .bicycle__review-writtings

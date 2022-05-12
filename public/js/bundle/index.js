@@ -9222,9 +9222,8 @@ var postReview = /*#__PURE__*/function () {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            console.log("dfsfdfs", review, rating, bicycleId);
-            _context.prev = 1;
-            _context.next = 4;
+            _context.prev = 0;
+            _context.next = 3;
             return (0, _axios.default)({
               method: "POST",
               url: "/api/v1/bicycle/".concat(bicycleId, "/review"),
@@ -9234,7 +9233,7 @@ var postReview = /*#__PURE__*/function () {
               }
             });
 
-          case 4:
+          case 3:
             resPostReview = _context.sent;
 
             if (resPostReview.data.status === "success") {
@@ -9242,20 +9241,20 @@ var postReview = /*#__PURE__*/function () {
               window.location.reload();
             }
 
-            _context.next = 11;
+            _context.next = 10;
             break;
 
-          case 8:
-            _context.prev = 8;
-            _context.t0 = _context["catch"](1);
+          case 7:
+            _context.prev = 7;
+            _context.t0 = _context["catch"](0);
             (0, _alert.showAlert)("error", _context.t0.response.data.message);
 
-          case 11:
+          case 10:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, null, [[1, 8]]);
+    }, _callee, null, [[0, 7]]);
   }));
 
   return function postReview(_x, _x2, _x3) {
@@ -9934,7 +9933,7 @@ if (userProfileForm) {
           switch (_context2.prev = _context2.next) {
             case 0:
               e.preventDefault();
-              document.getElementById("btn-save-profile").innerHTML = '<i class="fas fa-spinner fa-pulse"></i>'; // for programatically creating a multpart/form-data
+              document.getElementById("btn-save-profile").innerHTML = 'Updating <i class="fas fa-spinner fa-pulse"></i>'; // for programatically creating a multpart/form-data
 
               form = new FormData();
               form.append("name", document.getElementById("name").value);
@@ -9973,7 +9972,7 @@ if (userPasswordForm) {
           switch (_context3.prev = _context3.next) {
             case 0:
               e.preventDefault();
-              document.getElementById("btn-save-password").innerHTML = '<i class="fas fa-spinner fa-pulse"></i>';
+              document.getElementById("btn-save-password").innerHTML = 'Updating <i class="fas fa-spinner fa-pulse"></i>';
               passwordCurrent = document.getElementById("current-password").value;
               password = document.getElementById("password").value;
               passwordConfirm = document.getElementById("confirm-password").value;
@@ -10019,7 +10018,7 @@ if (bicycleReviewFormCreate) {
               e.preventDefault();
               document.getElementById("review-rating-btn").innerHTML = 'Submit Review <i class="fas fa-spinner fa-pulse"></i>';
               review = document.getElementById("review-text").value;
-              rating = document.querySelector('input[type="radio"]:checked').value;
+              rating = document.querySelector('input[type="radio"]:checked') ? document.querySelector('input[type="radio"]:checked').value : 0;
               bicycleId = document.getElementById("review-bicycle-id").value;
               _context4.next = 7;
               return (0, _review.postReview)(review, rating, bicycleId);
@@ -10054,9 +10053,9 @@ if (bicycleReviewFormEdit) {
           switch (_context5.prev = _context5.next) {
             case 0:
               e.preventDefault();
-              document.getElementById("review-rating-btn").innerHTML = 'Edit Review <i class="fas fa-spinner fa-pulse"></i>';
+              document.getElementById("review-rating-btn").innerHTML = 'Editing <i class="fas fa-spinner fa-pulse"></i>';
               review = document.getElementById("review-text").value;
-              rating = document.querySelector('input[type="radio"]:checked').value;
+              rating = document.querySelector('input[type="radio"]:checked') ? document.querySelector('input[type="radio"]:checked').value : 0;
               bicycleId = document.getElementById("review-bicycle-id").value;
               reviewId = document.getElementById("review-main-id").value;
               _context5.next = 8;
@@ -10155,7 +10154,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62973" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65266" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
