@@ -70,7 +70,7 @@ exports.getHomePage = catchError(async (req, res, next) => {
   const dataBicycles = await BicycleModel.find()
 
   res.status(200).render("pages/index", {
-    title: "Broom Broom Bike",
+    title: "FNR Riders",
     dataBicycles: dataBicycles.slice(0, 6),
   })
 })

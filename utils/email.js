@@ -56,14 +56,14 @@ class Email {
 
   // for sending welcome message when someone created a new account
   async sendWelcome() {
-    await this.send("welcome", "Welcome to Broom Broom Bike")
+    await this.send("welcome", "Welcome to FNR Riders")
   }
 
   // for sending password reset when a user forgot his account
   async sendPasswordReset() {
     await this.send(
       "passwordReset",
-      "Reset Password Instructions for Broom Broom Account"
+      "Reset Password Instructions for FNR Riders Account"
     )
   }
   async sendPasswordResetSuccessful() {

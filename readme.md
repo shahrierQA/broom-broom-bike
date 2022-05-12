@@ -1,4 +1,4 @@
-# App Name: Broom Broom Bike
+# App Name: FNR Riders
 
 ### Bike Rental System
 
