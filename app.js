@@ -5,6 +5,7 @@ const cookieParser = require("cookie-parser")
 const rateLimit = require("express-rate-limit")
 const compression = require("compression")
 const cors = require("cors")
+const helmet = require("helmet")
 
 const AppError = require("./utils/appError")
 const globalErrorHandler = require("./controllers/errorController")
@@ -22,6 +23,12 @@ const { webhookCheckout } = require("./controllers/bookingController")
  * Initialize app
  */
 const app = express()
+
+/**
+ * Add Security HTTP Headers
+ * Helmet - It is help us to secure HTTP Headers return by express app
+ */
+app.use(helmet())
 
 /**
  * Enable trust proxy
